@@ -1,0 +1,1950 @@
+<!DOCTYPE html>
+<html lang="en" data-theme-support>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>MediSafe India — check your prescription before you take it</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wdth,wght@12..96,75..100,400..800&family=Schibsted+Grotesk:wght@400;500;600;700&family=Caveat:wght@500;600&family=DM+Mono:wght@500&display=swap" rel="stylesheet">
+<style>
+/* ────────────────────────────────────────────────
+   MediSafe India
+   Palette drawn from the Indian pharmacy shopfront:
+   bottle green, foil-silver blister strips, paper slip,
+   and the red of a warning label.
+   ──────────────────────────────────────────────── */
+:root{
+  --green-900:#06322A;
+  --green-700:#0B5343;
+  --green-500:#12897C;
+  --green-100:#DCEDE6;
+  --paper:#F2F4EF;
+  --card:#FFFFFF;
+  --ink:#10211D;
+  --ink-soft:#4C605A;
+  --ink-faint:#7C8F89;
+  --line:#D8E0DA;
+  --foil:#E7EBE6;
+  --sev-high:#C0382C;
+  --sev-high-bg:#FBEDEB;
+  --sev-mid:#B26A06;
+  --sev-mid-bg:#FBF2E2;
+  --sev-low:#1F7A52;
+  --sev-low-bg:#E6F3EC;
+  --indigo:#2F3C8F;
+  --indigo-bg:#EBEDF9;
+  --violet:#7C4FE0;
+  --violet-bg:#F1EBFC;
+  --aurora-1:#12897C;
+  --aurora-2:#7C4FE0;
+  --aurora-3:#E0954F;
+  --shadow-lift:0 1px 2px rgba(6,50,42,.08), 0 12px 28px -18px rgba(6,50,42,.45);
+  --on-accent:#FFFFFF;
+  --r-s:8px; --r-m:14px; --r-l:22px;
+  --ff-display:"Bricolage Grotesque",-apple-system,Segoe UI,sans-serif;
+  --ff:"Schibsted Grotesk",-apple-system,Segoe UI,Roboto,sans-serif;
+  --ff-hand:"Caveat",cursive;
+  --ff-mono:"DM Mono",ui-monospace,monospace;
+  --glass-bg:color-mix(in srgb, var(--card) 72%, transparent);
+  --glass-border:color-mix(in srgb, var(--ink) 8%, transparent);
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --green-900:#B9E2D4;
+    --green-700:#7FD0BC;
+    --green-500:#46B6A2;
+    --green-100:#12302A;
+    --paper:#0B1210;
+    --card:#131C19;
+    --ink:#E7EFEA;
+    --ink-soft:#A6BAB3;
+    --ink-faint:#7D938C;
+    --line:#26332E;
+    --foil:#1A2521;
+    --sev-high:#F2897C;
+    --sev-high-bg:#2E1815;
+    --sev-mid:#E8B15A;
+    --sev-mid-bg:#2C2113;
+    --sev-low:#69C795;
+    --sev-low-bg:#122A1E;
+    --indigo:#A6B1F0;
+    --indigo-bg:#191E38;
+    --violet:#C4A8F5;
+    --violet-bg:#211A33;
+    --shadow-lift:0 1px 2px rgba(0,0,0,.4), 0 14px 30px -20px rgba(0,0,0,.9);
+    --on-accent:#06322A;
+    --glass-bg:color-mix(in srgb, var(--card) 60%, transparent);
+    --glass-border:color-mix(in srgb, #fff 8%, transparent);
+  }
+}
+:root[data-theme="dark"]{
+  --green-900:#B9E2D4; --green-700:#7FD0BC; --green-500:#46B6A2; --green-100:#12302A;
+  --paper:#0B1210; --card:#131C19; --ink:#E7EFEA; --ink-soft:#A6BAB3; --ink-faint:#7D938C;
+  --line:#26332E; --foil:#1A2521;
+  --sev-high:#F2897C; --sev-high-bg:#2E1815;
+  --sev-mid:#E8B15A; --sev-mid-bg:#2C2113;
+  --sev-low:#69C795; --sev-low-bg:#122A1E;
+  --indigo:#A6B1F0; --indigo-bg:#191E38;
+  --violet:#C4A8F5; --violet-bg:#211A33;
+  --shadow-lift:0 1px 2px rgba(0,0,0,.4), 0 14px 30px -20px rgba(0,0,0,.9);
+  --on-accent:#06322A;
+  --glass-bg:color-mix(in srgb, var(--card) 60%, transparent);
+  --glass-border:color-mix(in srgb, #fff 8%, transparent);
+}
+
+*,*::before,*::after{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{
+  margin:0; background:var(--paper); color:var(--ink);
+  font-family:var(--ff); font-size:16px; line-height:1.55;
+  font-feature-settings:"ss01" 1;
+  -webkit-font-smoothing:antialiased;
+}
+img{max-width:100%; display:block}
+button,input,select,textarea{font:inherit; color:inherit}
+button{cursor:pointer}
+a{color:var(--green-500)}
+:focus-visible{outline:3px solid var(--green-500); outline-offset:2px; border-radius:4px}
+@media (prefers-reduced-motion: reduce){
+  *{animation-duration:.001ms !important; animation-iteration-count:1 !important; transition-duration:.001ms !important}
+}
+
+/* ── App chrome ───────────────────────────────── */
+.topbar{
+  position:sticky; top:0; z-index:40;
+  display:flex; align-items:center; gap:14px;
+  padding:10px clamp(14px,3vw,28px);
+  background:color-mix(in srgb, var(--paper) 86%, transparent);
+  backdrop-filter:blur(12px);
+  border-bottom:1px solid var(--line);
+}
+.wordmark{display:flex; align-items:center; gap:10px; margin-right:auto; text-decoration:none; color:inherit}
+.rx-mark{
+  width:34px; height:34px; border-radius:10px; flex:none;
+  background:var(--green-700); color:#fff;
+  display:grid; place-items:center; font-family:var(--ff-display);
+  font-weight:800; font-size:17px; letter-spacing:-.02em;
+}
+.rx-mark{color:var(--on-accent)}
+.wordmark b{
+  font-family:var(--ff-display); font-weight:700; font-size:19px;
+  letter-spacing:-.03em; font-stretch:92%; display:block; line-height:1.1;
+}
+.wordmark span{font-size:11.5px; color:var(--ink-faint); letter-spacing:.01em}
+.chip-select{
+  border:1px solid var(--line); background:var(--card); color:var(--ink);
+  border-radius:999px; padding:7px 12px; font-size:13.5px; font-weight:500;
+}
+.icon-btn{
+  border:1px solid var(--line); background:var(--card); border-radius:999px;
+  width:38px; height:38px; display:grid; place-items:center; font-size:15px;
+}
+
+.shell{display:grid; grid-template-columns:230px minmax(0,1fr); gap:0; min-height:calc(100vh - 56px)}
+.rail{
+  border-right:1px solid var(--line); padding:22px 14px 40px;
+  position:sticky; top:56px; align-self:start; height:calc(100vh - 56px); overflow:auto;
+}
+.rail-title{font-size:11.5px; color:var(--ink-faint); margin:0 8px 10px; font-weight:600}
+.rail-step{
+  display:grid; grid-template-columns:26px 1fr; gap:10px; align-items:center;
+  width:100%; text-align:left; background:none; border:0;
+  padding:10px 8px; border-radius:var(--r-m); color:var(--ink-soft); font-weight:500;
+  transition:background .15s;
+}
+.rail-step:hover{background:var(--green-100)}
+.rail-step .num{
+  width:26px; height:26px; border-radius:8px; display:grid; place-items:center;
+  border:1px solid var(--line); font-size:12.5px; font-weight:700; color:var(--ink-faint);
+  background:var(--card);
+}
+.rail-step[aria-current="true"]{background:var(--green-100); color:var(--green-900); font-weight:600}
+.rail-step[aria-current="true"] .num{background:var(--green-700); color:var(--paper); border-color:var(--green-700)}
+.rail-step small{display:block; font-size:11.5px; font-weight:400; color:var(--ink-faint); line-height:1.3}
+.rail-foot{margin-top:26px; padding:12px; border-radius:var(--r-m); background:var(--foil); font-size:12px; color:var(--ink-soft); line-height:1.45}
+
+main{padding:clamp(18px,3vw,38px) clamp(14px,3.4vw,44px) 120px; min-width:0}
+.view{display:none}
+.view.on{display:block; animation:viewIn .45s cubic-bezier(.16,1,.3,1)}
+@keyframes viewIn{from{opacity:0; transform:translateY(10px)}to{opacity:1; transform:translateY(0)}}
+
+/* ── Aurora backdrop ──────────────────────────── */
+.aurora{position:fixed; inset:0; z-index:-1; overflow:hidden; pointer-events:none}
+.aurora i{position:absolute; border-radius:50%; filter:blur(70px); opacity:.35; display:block}
+.aurora i:nth-child(1){width:460px; height:460px; background:var(--aurora-1); top:-160px; left:-120px; animation:drift1 22s ease-in-out infinite alternate}
+.aurora i:nth-child(2){width:380px; height:380px; background:var(--aurora-2); top:120px; right:-140px; animation:drift2 26s ease-in-out infinite alternate}
+.aurora i:nth-child(3){width:300px; height:300px; background:var(--aurora-3); bottom:-140px; left:30%; animation:drift3 20s ease-in-out infinite alternate}
+@keyframes drift1{to{transform:translate(60px,40px) scale(1.12)}}
+@keyframes drift2{to{transform:translate(-50px,60px) scale(1.08)}}
+@keyframes drift3{to{transform:translate(30px,-50px) scale(1.15)}}
+[data-theme="dark"] .aurora i{opacity:.22}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]) .aurora i{opacity:.22}}
+
+/* ── Glass surface ────────────────────────────── */
+.glass{
+  background:var(--glass-bg); backdrop-filter:blur(18px) saturate(1.3);
+  border:1px solid var(--glass-border); border-radius:var(--r-l);
+  box-shadow:var(--shadow-lift);
+}
+.grad-text{
+  background:linear-gradient(100deg,var(--green-500),var(--violet) 70%);
+  -webkit-background-clip:text; background-clip:text; color:transparent;
+}
+
+/* ── Hover lift ───────────────────────────────── */
+.card,.strip,.alert,.result,.hist-item,.alt-card{transition:transform .18s ease, box-shadow .18s ease}
+.card:hover,.strip:hover,.alert:hover,.hist-item:hover,.alt-card:hover{transform:translateY(-2px); box-shadow:var(--shadow-lift)}
+
+
+/* ── Type ─────────────────────────────────────── */
+h1,h2,h3{font-family:var(--ff-display); letter-spacing:-.03em; margin:0; font-stretch:92%}
+h1{font-size:clamp(30px,4.6vw,48px); line-height:1.02; font-weight:700}
+h2{font-size:clamp(21px,2.6vw,27px); line-height:1.12; font-weight:700}
+h3{font-size:17px; line-height:1.2; font-weight:700; letter-spacing:-.02em}
+.lede{max-width:56ch; color:var(--ink-soft); font-size:16.5px; margin:12px 0 0}
+.sec{margin-top:clamp(30px,4vw,52px)}
+.sec-head{display:flex; align-items:baseline; gap:12px; flex-wrap:wrap; margin-bottom:14px}
+.sec-head p{margin:0; color:var(--ink-faint); font-size:14px; max-width:52ch}
+
+/* ── Hero: the prescription slip ──────────────── */
+.hero{display:grid; grid-template-columns:minmax(0,1.05fr) minmax(0,.95fr); gap:clamp(20px,3vw,44px); align-items:center}
+.slip-wrap{position:relative; padding:6px}
+.slip{
+  position:relative; background:var(--card); border:1px solid var(--line);
+  border-radius:4px 4px 12px 12px; padding:20px 22px 26px;
+  box-shadow:var(--shadow-lift); transform:rotate(-1.4deg);
+  overflow:hidden;
+}
+.slip::after{
+  content:""; position:absolute; left:0; right:0; bottom:0; height:16px;
+  background:
+    radial-gradient(circle at 8px -4px, transparent 8px, var(--paper) 8.5px) 0 100%/16px 16px repeat-x;
+}
+.slip-top{display:flex; justify-content:space-between; align-items:flex-start; border-bottom:1px dashed var(--line); padding-bottom:12px}
+.slip-top b{font-family:var(--ff-display); font-weight:700; font-size:15px; display:block}
+.slip-top span{font-size:11.5px; color:var(--ink-faint)}
+.rx-big{font-family:var(--ff-display); font-size:30px; font-weight:800; color:var(--green-500); line-height:1}
+.slip-lines{font-family:var(--ff-hand); font-size:24px; line-height:1.85; color:var(--ink); margin:12px 0 0; padding:0; list-style:none}
+.slip-lines li{border-bottom:1px solid color-mix(in srgb,var(--line) 60%, transparent); padding-left:18px; position:relative}
+.slip-lines li::before{content:"℞"; position:absolute; left:0; font-family:var(--ff); font-size:13px; color:var(--ink-faint); top:8px}
+.slip-sign{font-family:var(--ff-hand); font-size:20px; color:var(--ink-faint); text-align:right; margin-top:14px}
+.scanline{
+  position:absolute; left:0; right:0; height:64px; pointer-events:none; opacity:0;
+  background:linear-gradient(180deg, transparent, color-mix(in srgb,var(--green-500) 38%, transparent), transparent);
+  box-shadow:0 0 22px color-mix(in srgb,var(--green-500) 55%, transparent);
+}
+.slip.scanning .scanline{animation:sweep 1.5s ease-in-out 2; opacity:1}
+@keyframes sweep{0%{top:-64px}100%{top:100%}}
+
+.hero-actions{display:flex; flex-wrap:wrap; gap:10px; margin-top:22px}
+.btn{
+  border:1px solid transparent; border-radius:999px; padding:12px 20px;
+  font-weight:600; font-size:15px; background:var(--green-700); color:var(--on-accent);
+  display:inline-flex; align-items:center; gap:8px; transition:transform .12s, filter .15s;
+}
+.btn:hover{filter:brightness(1.08)}
+.btn:active{transform:translateY(1px)}
+.btn.ghost{background:transparent; border-color:var(--line); color:var(--ink)}
+.btn.ghost:hover{background:var(--foil)}
+.btn.small{padding:8px 14px; font-size:13.5px}
+.btn.danger{background:var(--sev-high); color:#fff}
+.btn:disabled{opacity:.5; cursor:not-allowed}
+
+.trust{display:flex; gap:18px; flex-wrap:wrap; margin-top:26px; padding-top:20px; border-top:1px solid var(--line)}
+.trust div{max-width:19ch}
+.trust b{font-family:var(--ff-display); font-size:22px; font-weight:700; display:block; color:var(--green-500); letter-spacing:-.02em}
+.trust span{font-size:12.5px; color:var(--ink-faint); line-height:1.35; display:block}
+
+/* ── Drop zone ────────────────────────────────── */
+.drop{
+  border:2px dashed var(--line); border-radius:var(--r-l); background:var(--card);
+  padding:26px; text-align:center; transition:border-color .15s, background .15s;
+}
+.drop.hot{border-color:var(--green-500); background:var(--green-100)}
+.drop h3{margin-bottom:6px}
+.drop p{margin:0 auto; color:var(--ink-faint); font-size:14px; max-width:44ch}
+.drop-row{display:flex; gap:10px; justify-content:center; flex-wrap:wrap; margin-top:16px}
+.preview{margin-top:16px; border-radius:var(--r-m); overflow:hidden; border:1px solid var(--line); max-height:280px}
+.preview img{width:100%; object-fit:cover; max-height:280px}
+
+.progress{height:6px; background:var(--foil); border-radius:999px; overflow:hidden; margin-top:14px}
+.progress i{display:block; height:100%; width:0; background:var(--green-500); transition:width .3s ease}
+.progress-note{font-size:13px; color:var(--ink-faint); margin:8px 0 0}
+
+/* ── Cards / medicine list ────────────────────── */
+.grid{display:grid; gap:14px}
+.g2{grid-template-columns:repeat(auto-fit,minmax(280px,1fr))}
+.g3{grid-template-columns:repeat(auto-fit,minmax(230px,1fr))}
+.card{background:var(--card); border:1px solid var(--line); border-radius:var(--r-l); padding:18px}
+.card.flat{box-shadow:none}
+
+.strip{
+  display:grid; grid-template-columns:52px minmax(0,1fr) auto; gap:14px; align-items:center;
+  background:var(--card); border:1px solid var(--line); border-radius:var(--r-m);
+  padding:12px 14px;
+}
+.pill-art{
+  width:52px; height:40px; border-radius:6px; flex:none; position:relative;
+  background:linear-gradient(120deg,var(--foil),color-mix(in srgb,var(--foil) 70%, var(--line)));
+  border:1px solid var(--line);
+  display:grid; grid-template-columns:repeat(3,1fr); align-items:center; justify-items:center; padding:0 3px;
+}
+.pill-art i{width:11px; height:11px; border-radius:999px; background:var(--green-500); opacity:.85; display:block}
+.pill-art i:nth-child(2){opacity:.6}
+.pill-art i:nth-child(3){opacity:.4}
+.pill-art.abx i{background:var(--indigo)}
+.strip b{display:block; font-size:15.5px; font-weight:600; letter-spacing:-.01em}
+.strip small{display:block; color:var(--ink-faint); font-size:12.5px}
+.dose{font-family:var(--ff-mono); font-size:12px; color:var(--ink-soft); background:var(--foil); padding:2px 7px; border-radius:5px}
+.strip-actions{display:flex; gap:6px; align-items:center}
+.x-btn{border:1px solid var(--line); background:transparent; border-radius:8px; width:30px; height:30px; display:grid; place-items:center; color:var(--ink-faint)}
+.x-btn:hover{border-color:var(--sev-high); color:var(--sev-high)}
+
+.tag{display:inline-flex; align-items:center; gap:5px; font-size:11.5px; font-weight:600; padding:3px 8px; border-radius:999px; background:var(--foil); color:var(--ink-soft)}
+.tag.rx{background:var(--indigo-bg); color:var(--indigo)}
+.tag.abx{background:var(--sev-mid-bg); color:var(--sev-mid)}
+.tag.otc{background:var(--sev-low-bg); color:var(--sev-low)}
+
+/* ── Search ───────────────────────────────────── */
+.search-wrap{position:relative}
+.search{
+  width:100%; padding:14px 16px 14px 44px; border-radius:999px;
+  border:1px solid var(--line); background:var(--card); font-size:15.5px;
+}
+.search-wrap::before{content:"⌕"; position:absolute; left:17px; top:50%; transform:translateY(-52%); font-size:21px; color:var(--ink-faint)}
+.results{margin-top:10px; display:grid; gap:8px; max-height:340px; overflow:auto; padding-right:4px}
+.result{
+  display:flex; align-items:center; gap:12px; width:100%; text-align:left;
+  background:var(--card); border:1px solid var(--line); border-radius:var(--r-m); padding:11px 14px;
+}
+.result:hover{border-color:var(--green-500); background:var(--green-100)}
+.result b{font-size:15px; font-weight:600}
+.result small{display:block; color:var(--ink-faint); font-size:12.5px}
+.result .add{margin-left:auto; color:var(--green-500); font-weight:700; font-size:20px}
+
+/* ── Verdict banner ───────────────────────────── */
+.verdict{border-radius:var(--r-l); padding:22px 24px; border:1px solid; display:grid; grid-template-columns:auto minmax(0,1fr) auto; gap:18px; align-items:center}
+.verdict .ring{width:62px; height:62px; border-radius:999px; display:grid; place-items:center; font-size:27px; border:3px solid}
+.verdict h2{font-size:24px}
+.verdict p{margin:5px 0 0; font-size:14.5px; max-width:56ch}
+.v-high{background:var(--sev-high-bg); border-color:color-mix(in srgb,var(--sev-high) 35%, transparent); color:var(--sev-high)}
+.v-mid{background:var(--sev-mid-bg); border-color:color-mix(in srgb,var(--sev-mid) 35%, transparent); color:var(--sev-mid)}
+.v-low{background:var(--sev-low-bg); border-color:color-mix(in srgb,var(--sev-low) 35%, transparent); color:var(--sev-low)}
+.verdict .ring{border-color:currentColor}
+.verdict p, .verdict h2{color:var(--ink)}
+
+/* ── Alert cards ──────────────────────────────── */
+.alert{border:1px solid var(--line); border-left:5px solid var(--line); border-radius:var(--r-m); background:var(--card); padding:16px 18px}
+.alert.high{border-left-color:var(--sev-high)}
+.alert.mid{border-left-color:var(--sev-mid)}
+.alert.low{border-left-color:var(--sev-low)}
+.alert-head{display:flex; align-items:center; gap:10px; flex-wrap:wrap}
+.sev-badge{font-size:11.5px; font-weight:700; padding:3px 9px; border-radius:999px}
+.high .sev-badge{background:var(--sev-high-bg); color:var(--sev-high)}
+.mid .sev-badge{background:var(--sev-mid-bg); color:var(--sev-mid)}
+.low .sev-badge{background:var(--sev-low-bg); color:var(--sev-low)}
+.alert h3{flex:1 1 auto; min-width:200px}
+.alert .why{margin:10px 0 0; font-size:14.5px; color:var(--ink-soft); max-width:68ch}
+.do{margin-top:12px; padding:11px 13px; border-radius:var(--r-s); background:var(--foil); font-size:14px; display:flex; gap:9px; align-items:flex-start}
+.do b{font-weight:600; white-space:nowrap}
+.alert-foot{margin-top:11px; display:flex; gap:12px; align-items:center; flex-wrap:wrap; font-size:12px; color:var(--ink-faint)}
+
+/* ── AMR meter ────────────────────────────────── */
+.amr{background:var(--indigo-bg); border:1px solid color-mix(in srgb,var(--indigo) 25%, transparent); border-radius:var(--r-l); padding:20px 22px}
+.meter{height:12px; border-radius:999px; background:color-mix(in srgb,var(--indigo) 16%, transparent); overflow:hidden; margin:14px 0 8px}
+.meter i{display:block; height:100%; background:var(--indigo); border-radius:999px; transition:width .5s ease}
+.course{display:flex; gap:6px; flex-wrap:wrap; margin-top:12px}
+.course button{
+  width:34px; height:34px; border-radius:9px; border:1px solid color-mix(in srgb,var(--indigo) 30%, transparent);
+  background:transparent; color:var(--indigo); font-size:12.5px; font-weight:600;
+}
+.course button.done{background:var(--indigo); color:var(--paper); border-color:var(--indigo)}
+
+/* ── Savings ──────────────────────────────────── */
+.save-row{display:grid; grid-template-columns:minmax(0,1fr) auto auto auto; gap:12px; align-items:center; padding:11px 0; border-bottom:1px solid var(--line)}
+.save-row:last-child{border-bottom:0}
+.money{font-family:var(--ff-mono); font-size:14px}
+.money.old{color:var(--ink-faint); text-decoration:line-through}
+.money.new{color:var(--sev-low); font-weight:600}
+.save-total{display:flex; align-items:baseline; gap:10px; margin-top:16px; padding-top:16px; border-top:2px solid var(--ink)}
+.save-total b{font-family:var(--ff-display); font-size:34px; font-weight:800; letter-spacing:-.03em}
+
+/* ── Schedule ─────────────────────────────────── */
+.day{display:grid; grid-template-columns:78px minmax(0,1fr); gap:0}
+.slot{border-top:1px solid var(--line); padding:16px 0 18px}
+.slot:first-of-type{border-top:0}
+.slot-time{font-family:var(--ff-display); font-weight:700; font-size:15px; letter-spacing:-.02em; padding-top:16px}
+.slot-time span{display:block; font-family:var(--ff); font-weight:400; font-size:11.5px; color:var(--ink-faint)}
+.slot-items{display:flex; flex-wrap:wrap; gap:8px}
+.slot-pill{display:inline-flex; align-items:center; gap:8px; background:var(--card); border:1px solid var(--line); border-radius:999px; padding:7px 14px 7px 8px; font-size:14px}
+.slot-pill i{width:9px; height:9px; border-radius:999px; background:var(--green-500)}
+.slot-empty{color:var(--ink-faint); font-size:13.5px; font-style:italic}
+.slot-note{font-size:12.5px; color:var(--sev-mid); margin-top:8px}
+
+/* ── Profile form ─────────────────────────────── */
+.field{margin-bottom:16px}
+.field label{display:block; font-size:13.5px; font-weight:600; margin-bottom:6px}
+.field input[type=text],.field input[type=number],.field select,.field textarea{
+  width:100%; padding:11px 13px; border-radius:var(--r-s); border:1px solid var(--line);
+  background:var(--paper); font-size:15px;
+}
+.checks{display:flex; flex-wrap:wrap; gap:8px}
+.check{display:inline-flex; align-items:center; gap:7px; border:1px solid var(--line); border-radius:999px; padding:8px 14px; background:var(--card); font-size:14px; cursor:pointer}
+.check input{accent-color:var(--green-500); margin:0}
+.check:has(input:checked){border-color:var(--green-500); background:var(--green-100); font-weight:600}
+
+/* ── Emergency card ───────────────────────────── */
+.ecard{
+  background:linear-gradient(145deg,var(--green-700),var(--green-900));
+  color:var(--on-accent); border-radius:var(--r-l); padding:22px 24px; position:relative; overflow:hidden;
+}
+.ecard::after{content:"✚"; position:absolute; right:-14px; bottom:-34px; font-size:130px; opacity:.13; line-height:1}
+.ecard h3{font-size:19px; margin-bottom:4px}
+.ecard .erow{display:flex; gap:10px; padding:8px 0; border-top:1px solid color-mix(in srgb, var(--on-accent) 22%, transparent); font-size:14px}
+.ecard .erow b{min-width:96px; opacity:.7; font-weight:500}
+
+/* ── Misc ─────────────────────────────────────── */
+.empty{border:1px dashed var(--line); border-radius:var(--r-l); padding:34px 24px; text-align:center; color:var(--ink-faint)}
+.empty h3{color:var(--ink); margin-bottom:6px}
+.note{font-size:12.5px; color:var(--ink-faint); line-height:1.5; max-width:70ch}
+.disclaimer{
+  margin-top:40px; border-radius:var(--r-m); border:1px solid var(--line);
+  background:var(--foil); padding:14px 16px; font-size:12.5px; color:var(--ink-soft); max-width:74ch;
+}
+.disclaimer b{color:var(--ink)}
+.toast{
+  position:fixed; left:50%; bottom:86px; transform:translateX(-50%) translateY(20px);
+  background:var(--ink); color:var(--paper); padding:12px 20px; border-radius:999px;
+  font-size:14px; font-weight:500; opacity:0; pointer-events:none; transition:.25s; z-index:90;
+  box-shadow:0 12px 30px -12px rgba(0,0,0,.5); max-width:90vw; text-align:center;
+}
+.toast.on{opacity:1; transform:translateX(-50%) translateY(0)}
+
+.tabbar{display:none}
+
+/* ── Responsive ───────────────────────────────── */
+@media (max-width:920px){
+  .hero{grid-template-columns:1fr}
+  .slip-wrap{order:-1}
+  .shell{grid-template-columns:1fr}
+  .rail{display:none}
+  main{padding-bottom:96px}
+  .tabbar{
+    display:grid; grid-template-columns:repeat(5,1fr); position:fixed; left:0; right:0; bottom:0; z-index:50;
+    background:color-mix(in srgb,var(--paper) 92%, transparent); backdrop-filter:blur(12px);
+    border-top:1px solid var(--line); padding:6px 6px calc(6px + env(safe-area-inset-bottom));
+  }
+  .tabbar button{background:none; border:0; padding:8px 4px; border-radius:12px; color:var(--ink-faint); font-size:11px; font-weight:600; display:grid; gap:3px; justify-items:center}
+  .tabbar button em{font-style:normal; font-size:18px; line-height:1}
+  .tabbar button[aria-current="true"]{color:var(--green-500); background:var(--green-100)}
+  .verdict{grid-template-columns:auto minmax(0,1fr); }
+  .verdict .btn{grid-column:1/-1}
+  .save-row{grid-template-columns:minmax(0,1fr) auto; row-gap:4px}
+}
+@media (max-width:520px){
+  .strip{grid-template-columns:44px minmax(0,1fr); row-gap:8px}
+  .strip-actions{grid-column:1/-1; justify-content:flex-end}
+  .pill-art{width:44px}
+  .day{grid-template-columns:1fr}
+  .slot-time{padding-top:0}
+}
+
+/* ── Dose & frequency check ───────────────────── */
+.dose-row{display:flex; align-items:center; gap:10px; flex-wrap:wrap; margin-top:9px; padding-top:9px; border-top:1px dashed var(--line)}
+.dose-field{display:flex; align-items:center; gap:6px; font-size:12.5px; color:var(--ink-soft)}
+.dose-field input{width:44px; padding:5px 6px; border-radius:7px; border:1px solid var(--line); background:var(--paper); font-size:13px; text-align:center; font-family:var(--ff-mono)}
+.dose-field span.unit{color:var(--ink-faint)}
+.dose-flag{font-size:11px; font-weight:700; padding:2px 7px; border-radius:999px}
+.dose-flag.ok{background:var(--sev-low-bg); color:var(--sev-low)}
+.dose-flag.warn{background:var(--sev-mid-bg); color:var(--sev-mid)}
+.dose-flag.bad{background:var(--sev-high-bg); color:var(--sev-high)}
+
+/* ── Severity chip w/ emoji ───────────────────── */
+.sev-emoji{font-size:13px; line-height:1}
+.source-line{margin-top:9px; font-size:11.5px; color:var(--ink-faint); display:flex; gap:6px; align-items:center}
+.explain-flow{display:flex; align-items:center; flex-wrap:wrap; gap:6px; font-size:12.5px; color:var(--ink-soft); margin-top:8px}
+.explain-flow b{color:var(--ink); font-weight:600}
+.explain-flow em{font-style:normal; color:var(--ink-faint)}
+
+/* ── Alternatives ─────────────────────────────── */
+.alt-card{background:var(--indigo-bg); border:1px solid color-mix(in srgb,var(--indigo) 22%, transparent); border-radius:var(--r-m); padding:14px 16px}
+.alt-card h4{margin:0 0 6px; font-size:14.5px; font-weight:700; color:var(--indigo)}
+.alt-list{margin:0; padding-left:18px; font-size:13.5px; color:var(--ink-soft)}
+.alt-list li{margin-bottom:4px}
+.alt-note{font-size:11.5px; color:var(--ink-faint); margin-top:8px}
+
+/* ── Review card ───────────────────────────────── */
+.review-card{border:1px solid var(--line); border-radius:var(--r-l); padding:16px 18px; background:var(--card)}
+.review-banner{display:flex; align-items:center; gap:12px; border-radius:var(--r-m); padding:12px 16px; background:var(--sev-low-bg); border:1px solid color-mix(in srgb,var(--sev-low) 30%, transparent); color:var(--sev-low); font-size:14px; font-weight:600}
+.review-banner button{margin-left:auto; font-size:12px; font-weight:600; background:none; border:1px solid currentColor; color:inherit; border-radius:999px; padding:5px 12px}
+.review-form{display:grid; gap:10px; grid-template-columns:repeat(auto-fit,minmax(150px,1fr))}
+.review-form .field{margin:0}
+.review-form .field.full{grid-column:1/-1}
+
+/* ── History ──────────────────────────────────── */
+.hist-item{border:1px solid var(--line); border-radius:var(--r-m); padding:14px 16px; background:var(--card)}
+.hist-item + .hist-item{margin-top:10px}
+.hist-date{font-family:var(--ff-mono); font-size:12px; color:var(--ink-faint); margin-bottom:8px; display:flex; align-items:center; gap:8px}
+.hist-pill{display:inline-flex; align-items:center; gap:5px; background:var(--foil); border-radius:999px; padding:4px 10px 4px 6px; font-size:12.5px; margin:0 6px 6px 0}
+.hist-pill.new-med{background:var(--indigo-bg); color:var(--indigo)}
+.hist-pill.repeat-med{background:var(--sev-mid-bg); color:var(--sev-mid)}
+
+/* ── Extraction preview ───────────────────────── */
+.extract-list{margin-top:12px; display:grid; gap:6px}
+.extract-row{display:grid; grid-template-columns:minmax(0,1fr) auto auto; gap:10px; align-items:center; font-size:13px; padding:8px 10px; border-radius:8px; background:var(--foil)}
+.extract-row b{font-weight:600}
+.extract-row span{color:var(--ink-soft); font-family:var(--ff-mono); font-size:11.5px}
+
+/* ── Risk gauge ───────────────────────────────── */
+.gauge-wrap{display:flex; align-items:center; gap:24px; flex-wrap:wrap; padding:22px 24px}
+.gauge-ring{flex:none}
+.gauge-ring text{font-family:var(--ff-display); font-weight:800}
+.gauge-copy h3{font-size:19px}
+.gauge-copy p{margin:6px 0 0; color:var(--ink-soft); font-size:14px; max-width:44ch}
+
+/* ── Network diagram ──────────────────────────── */
+.net-card{padding:20px 22px}
+.net-card svg{width:100%; height:auto; display:block}
+.net-legend{display:flex; gap:16px; flex-wrap:wrap; margin-top:10px; font-size:12px; color:var(--ink-soft)}
+.net-legend span{display:inline-flex; align-items:center; gap:6px}
+.net-legend i{width:16px; height:3px; border-radius:2px; display:inline-block}
+
+/* ── Reminders ────────────────────────────────── */
+.reminder-card{display:flex; align-items:center; gap:14px; flex-wrap:wrap; padding:16px 18px}
+.reminder-status{font-size:13px; color:var(--ink-soft)}
+
+/* ── Family profiles ──────────────────────────── */
+.profile-switch{display:flex; align-items:center; gap:8px; flex-wrap:wrap}
+.profile-pill{display:inline-flex; align-items:center; gap:8px; border:1px solid var(--line); border-radius:999px; padding:6px 6px 6px 14px; font-size:13.5px; background:var(--card)}
+.profile-pill.active{border-color:var(--green-500); background:var(--green-100); font-weight:600}
+.profile-pill button{border:0; background:var(--foil); border-radius:999px; width:22px; height:22px; display:grid; place-items:center; font-size:11px; color:var(--ink-faint)}
+.profile-add{display:flex; gap:8px; margin-top:12px}
+.profile-add input{flex:1; padding:9px 12px; border-radius:999px; border:1px solid var(--line); background:var(--paper); font-size:13.5px}
+
+/* ── Print report ─────────────────────────────── */
+@media print{
+  .topbar,.rail,.tabbar,.no-print,.hero-actions,.drop{display:none !important}
+  body{background:#fff; color:#000}
+  main{padding:0}
+  .card,.alert,.strip{break-inside:avoid; box-shadow:none}
+  .view{display:none !important}
+  .view.on{display:block !important}
+}
+</style>
+</head>
+<body>
+<div class="aurora"><i></i><i></i><i></i></div>
+
+<header class="topbar">
+  <a class="wordmark" href="#" onclick="go('check');return false">
+    <span class="rx-mark">℞</span>
+    <span><b>MediSafe</b><span data-i18n="tagline">Prescription safety for every Indian household</span></span>
+  </a>
+  <select class="chip-select" id="lang" aria-label="Language">
+    <option value="en">English</option>
+    <option value="hi">हिन्दी</option>
+    <option value="ta">தமிழ்</option>
+  </select>
+  <button class="icon-btn" id="speakBtn" title="Read the warnings aloud" aria-label="Read the warnings aloud">🔊</button>
+  <button class="icon-btn" id="themeBtn" title="Switch light or dark" aria-label="Switch light or dark">◐</button>
+</header>
+
+<div class="shell">
+  <nav class="rail" aria-label="Steps">
+    <p class="rail-title" data-i18n="howItWorks">How it works</p>
+    <button class="rail-step" data-view="check" aria-current="true">
+      <span class="num">1</span>
+      <span><span data-i18n="navCheck">Add medicines</span><small data-i18n="navCheckSub">Scan the slip or search</small></span>
+    </button>
+    <button class="rail-step" data-view="result">
+      <span class="num">2</span>
+      <span><span data-i18n="navResult">Safety check</span><small data-i18n="navResultSub">Clashes, food, duplicates</small></span>
+    </button>
+    <button class="rail-step" data-view="plan">
+      <span class="num">3</span>
+      <span><span data-i18n="navPlan">Daily plan</span><small data-i18n="navPlanSub">When to take what</small></span>
+    </button>
+    <button class="rail-step" data-view="you">
+      <span class="num">4</span>
+      <span><span data-i18n="navYou">Your details</span><small data-i18n="navYouSub">Allergies, conditions</small></span>
+    </button>
+    <button class="rail-step" data-view="history">
+      <span class="num">5</span>
+      <span>Patient history<small>Past prescriptions, compared</small></span>
+    </button>
+    <div class="rail-foot">
+      <b data-i18n="railFootT">Secure and private processing.</b>
+      <span data-i18n="railFootB"> Your prescription photo and health details stay private to your session.</span>
+    </div>
+  </nav>
+
+  <main>
+    <!-- ══════════ VIEW 1: CHECK ══════════ -->
+    <section class="view on" id="view-check">
+      <div class="hero">
+        <div>
+          <h1 data-i18n="heroH" class="grad-text">Four medicines. One of them shouldn't be there.</h1>
+          <p class="lede" data-i18n="heroP">Photograph the prescription your doctor handed you. MediSafe reads the medicine names, checks them against each other and against your own health details, and tells you in plain words what to ask about — before you swallow anything.</p>
+          <div class="hero-actions">
+            <button class="btn" id="tryDemo" data-i18n="tryDemo">Scan the sample slip</button>
+            <button class="btn ghost" onclick="document.getElementById('file').click()" data-i18n="uploadYours">Upload your own</button>
+          </div>
+          <div class="trust">
+            <div><b>1 in 7</b><span data-i18n="stat1">prescriptions in India carry at least one interacting pair</span></div>
+            <div><b>₹1,840</b><span data-i18n="stat2">average yearly saving when you switch to generics</span></div>
+            <div><b>0</b><span data-i18n="stat3">of your data is sold to third parties</span></div>
+          </div>
+        </div>
+
+        <div class="slip-wrap">
+          <div class="slip" id="slip">
+            <div class="scanline"></div>
+            <div class="slip-top">
+              <div>
+                <b>Dr. A. Ramanathan, MBBS</b>
+                <span>Sunrise Clinic · Katpadi · Reg. 74821</span>
+              </div>
+              <span class="rx-big">℞</span>
+            </div>
+            <ul class="slip-lines">
+              <li>Dolo 650 — 1-0-1</li>
+              <li>Combiflam — 1-0-1 × 5d</li>
+              <li>Ciplox 500 — 1-0-1</li>
+              <li>Shelcal 500 — 0-0-1</li>
+            </ul>
+            <p class="slip-sign">signature</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="sec">
+        <div class="drop" id="drop">
+          <input type="file" id="file" accept="image/*" hidden>
+          <h3 data-i18n="dropH">Drop the prescription photo here</h3>
+          <p data-i18n="dropP">A clear phone photo works. Handwriting is hard to read, so check every name before you continue.</p>
+          <div class="drop-row">
+            <button class="btn small" onclick="document.getElementById('file').click()" data-i18n="chooseFile">Choose a photo</button>
+            <button class="btn small ghost" id="tryDemo2" data-i18n="useSample">Use the sample slip</button>
+          </div>
+          <div id="previewBox"></div>
+          <div id="ocrBox" hidden>
+            <div class="progress"><i id="bar"></i></div>
+            <p class="progress-note" id="ocrNote">Reading…</p>
+          </div>
+        </div>
+        <p class="note" style="margin-top:10px" data-i18n="ocrNoteStatic">This app uses Tesseract OCR on the backend to read prescription images and fuzzy match them to medicine databases.</p>
+      </div>
+
+      <div class="sec">
+        <div class="sec-head">
+          <h2 data-i18n="addH">Add a medicine by name</h2>
+          <p data-i18n="addP">Brand or salt name — try “Dolo”, “paracetamol”, “Azithral”.</p>
+        </div>
+        <div class="search-wrap">
+          <input class="search" id="q" type="text" autocomplete="off" placeholder="Search 30+ common Indian medicines" aria-label="Search medicines">
+        </div>
+        <div class="results" id="results"></div>
+      </div>
+
+      <div class="sec">
+        <div class="sec-head">
+          <h2 data-i18n="listH">Your medicine list</h2>
+          <p id="listCount"></p>
+        </div>
+        <div id="myMeds" class="grid"></div>
+        <div class="hero-actions">
+          <button class="btn" id="runCheck" data-i18n="runCheck">Check these together</button>
+          <button class="btn ghost small" id="clearAll" data-i18n="clearAll">Clear list</button>
+        </div>
+      </div>
+
+      <p class="disclaimer"><b data-i18n="discT">MediSafe is a second pair of eyes, not a doctor.</b> <span data-i18n="discB">It flags known interactions so you can ask better questions. It cannot judge whether a prescription is right for you. Never stop a prescribed medicine on the basis of this screen — call the doctor who wrote it.</span></p>
+    </section>
+
+    <!-- ══════════ VIEW 2: RESULT ══════════ -->
+    <section class="view" id="view-result">
+      <h1 data-i18n="resH">Safety check</h1>
+      <p class="lede" id="resSub"></p>
+      <div id="verdictBox" style="margin-top:22px"></div>
+      <div class="sec" id="gaugeBox"></div>
+      <div class="sec no-print" id="reviewBox"></div>
+      <div class="sec" id="alertsBox"></div>
+      <div class="sec" id="netBox"></div>
+      <div class="sec" id="altBox"></div>
+      <div class="sec" id="historyCompareBox"></div>
+      <div class="sec" id="amrBox"></div>
+      <div class="sec" id="foodBox"></div>
+      <div class="sec" id="savingsBox"></div>
+      <div class="hero-actions no-print">
+        <button class="btn" onclick="window.print()" data-i18n="printReport">Print this report</button>
+        <button class="btn ghost" id="shareBtn">Share summary</button>
+        <button class="btn ghost" onclick="go('plan')" data-i18n="seePlan">See the daily plan</button>
+        <button class="btn ghost" onclick="go('check')" data-i18n="editList">Edit the list</button>
+      </div>
+      <p class="disclaimer"><b data-i18n="discT">MediSafe is a second pair of eyes, not a doctor.</b> <span data-i18n="discB2">Show this page to your doctor or pharmacist and ask about anything marked red or orange. Interaction data here is a curated demo set, not a complete drug reference.</span></p>
+    </section>
+
+    <!-- ══════════ VIEW 3: PLAN ══════════ -->
+    <section class="view" id="view-plan">
+      <h1 data-i18n="planH">Your day, hour by hour</h1>
+      <p class="lede" data-i18n="planP">Some medicines fight each other in the stomach. Spacing them out is often all it takes. Here is a schedule built around that.</p>
+      <div class="sec">
+        <div class="card reminder-card glass" id="reminderCard">
+          <div style="flex:1; min-width:220px">
+            <h3>🔔 Daily reminders</h3>
+            <p class="reminder-status" id="reminderStatus">Turn on to get a browser notification at each slot's time, for as long as this tab stays open.</p>
+          </div>
+          <button class="btn small" id="reminderBtn">Enable reminders</button>
+        </div>
+      </div>
+      <div class="sec">
+        <div class="card"><div class="day" id="dayPlan"></div></div>
+      </div>
+      <div class="sec" id="gapBox"></div>
+      <div class="hero-actions no-print">
+        <button class="btn" onclick="window.print()" data-i18n="printPlan">Print the schedule</button>
+        <button class="btn ghost" onclick="go('result')" data-i18n="backResult">Back to the safety check</button>
+      </div>
+    </section>
+
+    <!-- ══════════ VIEW 4: YOU ══════════ -->
+    <section class="view" id="view-you">
+      <h1 data-i18n="youH">Your details</h1>
+      <p class="lede" data-i18n="youP">These change what counts as risky. A painkiller that is fine for most people is not fine with a stomach ulcer. Everything here is stored only on this device.</p>
+
+      <div class="sec">
+        <div class="card glass">
+          <h3>👪 Family members</h3>
+          <p class="note" style="margin:6px 0 12px">Keep a separate list, profile and history for each person you manage medicines for — all still stored only on this device.</p>
+          <div class="profile-switch" id="profileSwitch"></div>
+          <div class="profile-add">
+            <input type="text" id="newProfileName" placeholder="Add a family member, e.g. Amma">
+            <button class="btn small" id="addProfileBtn">Add</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="sec grid g2">
+        <div class="card">
+          <h3 data-i18n="aboutH">About you</h3>
+          <div class="field" style="margin-top:14px">
+            <label for="pname" data-i18n="fName">Name (for the emergency card)</label>
+            <input type="text" id="pname" placeholder="e.g. Lakshmi R.">
+          </div>
+          <div class="grid g2" style="gap:12px">
+            <div class="field">
+              <label for="page" data-i18n="fAge">Age</label>
+              <input type="number" id="page" min="0" max="120" placeholder="34">
+            </div>
+            <div class="field">
+              <label for="pweight" data-i18n="fWeight">Weight (kg)</label>
+              <input type="number" id="pweight" min="0" max="250" placeholder="62">
+            </div>
+          </div>
+          <div class="field">
+            <label for="pblood" data-i18n="fBlood">Blood group</label>
+            <select id="pblood"><option value="">Not sure</option><option>A+</option><option>A−</option><option>B+</option><option>B−</option><option>O+</option><option>O−</option><option>AB+</option><option>AB−</option></select>
+          </div>
+          <div class="field">
+            <label for="pcontact" data-i18n="fContact">Emergency contact</label>
+            <input type="text" id="pcontact" placeholder="Name and phone number">
+          </div>
+        </div>
+
+        <div>
+          <div class="card">
+            <h3 data-i18n="condH">Conditions you live with</h3>
+            <p class="note" style="margin:6px 0 12px" data-i18n="condP">Tick anything that applies. MediSafe will raise the alert level for medicines that don't suit these.</p>
+            <div class="checks" id="conds"></div>
+          </div>
+          <div class="card" style="margin-top:14px">
+            <h3 data-i18n="allergyH">Known allergies</h3>
+            <p class="note" style="margin:6px 0 12px" data-i18n="allergyP">A penicillin allergy is the single most common cause of a serious reaction in an Indian clinic. Tick it if you have ever reacted.</p>
+            <div class="checks" id="allergies"></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="sec">
+        <div class="sec-head">
+          <h2 data-i18n="ecardH">Emergency card</h2>
+          <p data-i18n="ecardP">Print it, fold it, keep it in your wallet. It is what a paramedic will look for.</p>
+        </div>
+        <div class="grid g2">
+          <div class="ecard" id="ecard"></div>
+          <div class="card">
+            <h3 data-i18n="keepH">Keeping it useful</h3>
+            <ul class="note" style="padding-left:18px; margin:10px 0 0">
+              <li data-i18n="keep1">Update it whenever a doctor changes a dose.</li>
+              <li data-i18n="keep2">Write allergies as the reaction you had, not just the drug name — “rash after Augmentin” tells a doctor more.</li>
+              <li data-i18n="keep3">Carry it for elderly parents too; they often can't recall six medicine names under stress.</li>
+            </ul>
+            <div class="hero-actions">
+              <button class="btn small" onclick="window.print()" data-i18n="printCard">Print the card</button>
+              <button class="btn small ghost" id="saveProfile" data-i18n="saveProfile">Save details</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ══════════ VIEW 5: HISTORY ══════════ -->
+    <section class="view" id="view-history">
+      <h1>Patient history</h1>
+      <p class="lede">Every time you run a safety check, a snapshot of that medicine list is kept here — only on this device — so a new prescription can be compared against what came before.</p>
+      <div class="sec" id="historyBox"></div>
+      <div class="hero-actions no-print">
+        <button class="btn ghost small" id="clearHistory">Clear history</button>
+      </div>
+    </section>
+  </main>
+</div>
+
+<nav class="tabbar" aria-label="Sections">
+  <button data-view="check" aria-current="true"><em>℞</em><span data-i18n="tabCheck">Medicines</span></button>
+  <button data-view="result"><em>⚠</em><span data-i18n="tabResult">Safety</span></button>
+  <button data-view="plan"><em>◷</em><span data-i18n="tabPlan">Plan</span></button>
+  <button data-view="you"><em>✚</em><span data-i18n="tabYou">You</span></button>
+  <button data-view="history"><em>🕘</em><span>History</span></button>
+</nav>
+
+<div class="toast" id="toast"></div>
+
+<script>
+/* ═══════════════════════════════════════════════
+   CONFIGURATION - BACKEND URL
+   ═══════════════════════════════════════════════ */
+// Set your live deployed Render/Railway backend URL here
+const BACKEND_URL = "https://rajeshkannan-2119.github.io/medisafe/";
+
+/* ═══════════════════════════════════════════════
+   DATA — curated set of common Indian medicines
+   ═══════════════════════════════════════════════ */
+const MEDS = [
+  {id:'dolo',    brand:'Dolo 650',      gen:'Paracetamol 650 mg',        cls:'analgesic',  use:'Fever and body pain', rx:false, mrp:32,  jan:12, para:650, when:['morning','night'], food:'any',   note:'Never cross 4000 mg of paracetamol in 24 hours from all sources put together.'},
+  {id:'crocin',  brand:'Crocin Advance',gen:'Paracetamol 500 mg',        cls:'analgesic',  use:'Fever and mild pain', rx:false, mrp:30,  jan:11, para:500, when:['morning','night'], food:'any'},
+  {id:'combi',   brand:'Combiflam',     gen:'Ibuprofen 400 + Paracetamol 325', cls:'nsaid', use:'Pain with swelling', rx:false, mrp:48, jan:19, para:325, nsaid:true, when:['morning','night'], food:'after', note:'Contains paracetamol as well — count it towards your daily limit.'},
+  {id:'brufen',  brand:'Brufen 400',    gen:'Ibuprofen 400 mg',          cls:'nsaid',      use:'Pain, swelling, period pain', rx:false, mrp:45, jan:18, nsaid:true, when:['morning','night'], food:'after'},
+  {id:'ecosprin',brand:'Ecosprin 75',   gen:'Aspirin 75 mg',             cls:'antiplatelet', use:'Thins blood after a heart problem', rx:true, mrp:12, jan:5, when:['night'], food:'after'},
+  {id:'disprin', brand:'Disprin',       gen:'Aspirin 325 mg',            cls:'nsaid',      use:'Headache and fever', rx:false, mrp:15, jan:6, nsaid:true, when:['morning'], food:'after'},
+  {id:'augmentin',brand:'Augmentin 625',gen:'Amoxicillin 500 + Clavulanate 125', cls:'antibiotic', abx:true, family:'penicillin', use:'Bacterial infection — throat, chest, skin', rx:true, mrp:210, jan:84, when:['morning','night'], food:'after', course:5},
+  {id:'azithral',brand:'Azithral 500',  gen:'Azithromycin 500 mg',       cls:'antibiotic', abx:true, family:'macrolide', use:'Chest and throat infection', rx:true, mrp:112, jan:45, when:['morning'], food:'any', course:3},
+  {id:'ciplox',  brand:'Ciplox 500',    gen:'Ciprofloxacin 500 mg',      cls:'antibiotic', abx:true, family:'fluoroquinolone', use:'Urine and gut infection', rx:true, mrp:88, jan:35, when:['morning','night'], food:'after', course:5},
+  {id:'cefixime',brand:'Monocef-O 200', gen:'Cefixime 200 mg',           cls:'antibiotic', abx:true, family:'cephalosporin', use:'Typhoid, throat, urine infection', rx:true, mrp:135, jan:54, when:['morning','night'], food:'after', course:5},
+  {id:'flagyl',  brand:'Flagyl 400',    gen:'Metronidazole 400 mg',      cls:'antibiotic', abx:true, family:'nitroimidazole', use:'Loose motions, dental and gut infection', rx:true, mrp:38, jan:15, when:['morning','afternoon','night'], food:'after', course:5},
+  {id:'pan',     brand:'Pan 40',        gen:'Pantoprazole 40 mg',        cls:'acid',       use:'Acidity and stomach protection', rx:true, mrp:95, jan:38, when:['empty'], food:'before'},
+  {id:'omez',    brand:'Omez 20',       gen:'Omeprazole 20 mg',          cls:'acid',       use:'Acidity and reflux', rx:false, mrp:72, jan:29, when:['empty'], food:'before'},
+  {id:'digene',  brand:'Digene',        gen:'Antacid gel with simethicone', cls:'antacid', use:'Quick relief from gas and burning', rx:false, mrp:95, jan:40, when:['night'], food:'after'},
+  {id:'cetzine', brand:'Cetzine 10',    gen:'Cetirizine 10 mg',          cls:'antihistamine', sedating:true, use:'Allergy, sneezing, itching', rx:false, mrp:28, jan:10, when:['night'], food:'any'},
+  {id:'montair', brand:'Montair-LC',    gen:'Montelukast 10 + Levocetirizine 5', cls:'antihistamine', sedating:true, use:'Allergy and allergic asthma', rx:true, mrp:185, jan:74, when:['night'], food:'any'},
+  {id:'sinarest',brand:'Sinarest',      gen:'Paracetamol 500 + Phenylephrine + CPM', cls:'cold', sedating:true, use:'Cold, blocked nose, fever', rx:false, mrp:58, jan:23, para:500, when:['morning','night'], food:'after', note:'Contains paracetamol — count it towards the daily limit.'},
+  {id:'glycomet',brand:'Glycomet 500',  gen:'Metformin 500 mg',          cls:'diabetes',   use:'Type 2 diabetes', rx:true, mrp:42, jan:17, when:['morning','night'], food:'after'},
+  {id:'amaryl',  brand:'Amaryl 2',      gen:'Glimepiride 2 mg',          cls:'diabetes', hypo:true, use:'Type 2 diabetes', rx:true, mrp:118, jan:47, when:['morning'], food:'before'},
+  {id:'telma',   brand:'Telma 40',      gen:'Telmisartan 40 mg',         cls:'bp', arb:true, use:'High blood pressure', rx:true, mrp:128, jan:51, when:['morning'], food:'any'},
+  {id:'losar',   brand:'Losar 50',      gen:'Losartan 50 mg',            cls:'bp', arb:true, use:'High blood pressure', rx:true, mrp:98, jan:39, when:['morning'], food:'any'},
+  {id:'amlong',  brand:'Amlong 5',      gen:'Amlodipine 5 mg',           cls:'bp',         use:'High blood pressure', rx:true, mrp:56, jan:22, when:['night'], food:'any'},
+  {id:'metolar', brand:'Metolar 50',    gen:'Metoprolol 50 mg',          cls:'bp', beta:true, use:'Blood pressure and heart rate', rx:true, mrp:74, jan:30, when:['morning','night'], food:'after'},
+  {id:'atorva',  brand:'Atorva 10',     gen:'Atorvastatin 10 mg',        cls:'statin',     use:'Lowers cholesterol', rx:true, mrp:88, jan:35, when:['night'], food:'any'},
+  {id:'rosuvas', brand:'Rosuvas 10',    gen:'Rosuvastatin 10 mg',        cls:'statin',     use:'Lowers cholesterol', rx:true, mrp:142, jan:57, when:['night'], food:'any'},
+  {id:'clopilet',brand:'Clopilet 75',   gen:'Clopidogrel 75 mg',         cls:'antiplatelet', use:'Prevents clots after a stent or stroke', rx:true, mrp:98, jan:39, when:['morning'], food:'any'},
+  {id:'warf',    brand:'Warf 5',        gen:'Warfarin 5 mg',             cls:'blood-thinner', use:'Strong blood thinner', rx:true, mrp:65, jan:26, when:['night'], food:'any'},
+  {id:'eltroxin',brand:'Eltroxin 50',   gen:'Levothyroxine 50 mcg',      cls:'thyroid',    use:'Underactive thyroid', rx:true, mrp:118, jan:47, when:['empty'], food:'before'},
+  {id:'alprax',  brand:'Alprax 0.25',   gen:'Alprazolam 0.25 mg',        cls:'sedative', sedating:true, use:'Anxiety and sleeplessness', rx:true, mrp:35, jan:14, when:['night'], food:'any'},
+  {id:'ultracet',brand:'Ultracet',      gen:'Tramadol 37.5 + Paracetamol 325', cls:'opioid', sedating:true, para:325, use:'Strong pain', rx:true, mrp:165, jan:66, when:['morning','night'], food:'after'},
+  {id:'omnacortil',brand:'Omnacortil 10',gen:'Prednisolone 10 mg',       cls:'steroid',    use:'Heavy inflammation, asthma flare', rx:true, mrp:48, jan:19, when:['morning'], food:'after'},
+  {id:'shelcal', brand:'Shelcal 500',   gen:'Calcium 500 + Vitamin D3',  cls:'supplement', cal:true, use:'Bone strength', rx:false, mrp:110, jan:44, when:['night'], food:'after'},
+  {id:'zincovit',brand:'Zincovit',      gen:'Multivitamin with zinc',    cls:'supplement', use:'General supplement', rx:false, mrp:105, jan:42, when:['morning'], food:'after'}
+];
+
+const PAIRS = [
+  {a:'warf', b:'ecosprin', sev:'high', t:'Warfarin with aspirin', why:'Both thin the blood by different routes. Together the risk of bleeding you cannot see — in the stomach or the brain — rises sharply.', do:'Do not take these together unless a cardiologist has written both deliberately. If both are prescribed, ask what INR range you are being monitored to.'},
+  {a:'warf', b:'brufen', sev:'high', t:'Warfarin with ibuprofen', why:'Ibuprofen irritates the stomach lining while warfarin stops clots from forming there. A small ulcer can turn into a serious bleed.', do:'Use paracetamol for pain instead, and ask your doctor before any painkiller.'},
+  {a:'warf', b:'combi', sev:'high', t:'Warfarin with Combiflam', why:'Combiflam contains ibuprofen, which sharply raises bleeding risk alongside warfarin.', do:'Switch to plain paracetamol for pain relief.'},
+  {a:'warf', b:'flagyl', sev:'high', t:'Warfarin with metronidazole', why:'Metronidazole slows the liver enzyme that clears warfarin, so warfarin levels climb and bleeding risk rises within days.', do:'Tell the doctor you are on warfarin. If this antibiotic is needed, your INR should be tested during the course.'},
+  {a:'warf', b:'azithral', sev:'mid', t:'Warfarin with azithromycin', why:'Antibiotics disturb the gut bacteria that make vitamin K, which can make warfarin act more strongly.', do:'Watch for bleeding gums, dark stool or unusual bruising during the course and report them.'},
+  {a:'clopilet', b:'omez', sev:'high', t:'Clopidogrel with omeprazole', why:'Omeprazole blocks the liver step that turns clopidogrel into its active form. The clot protection you are relying on may quietly stop working.', do:'Ask whether pantoprazole can replace omeprazole — it interferes far less.'},
+  {a:'clopilet', b:'ecosprin', sev:'mid', t:'Clopidogrel with aspirin', why:'This pair is often prescribed on purpose after a stent, but it does raise bleeding risk.', do:'Confirm with your cardiologist how many months you are meant to stay on both. Do not extend it yourself.'},
+  {a:'clopilet', b:'brufen', sev:'mid', t:'Clopidogrel with ibuprofen', why:'Adds stomach bleeding risk on top of an already reduced ability to clot.', do:'Prefer paracetamol. If you need ibuprofen for more than two days, ask about stomach protection.'},
+  {a:'brufen', b:'ecosprin', sev:'mid', t:'Ibuprofen with low-dose aspirin', why:'Ibuprofen sits on the same spot on the platelet that aspirin needs, so the heart protection from aspirin can be blunted.', do:'Take aspirin first thing in the morning and leave at least two hours before any ibuprofen.'},
+  {a:'brufen', b:'telma', sev:'mid', t:'Ibuprofen with telmisartan', why:'Painkillers of this type make the kidneys hold on to salt and water, which pushes blood pressure back up and strains the kidney.', do:'Occasional use is usually fine. Daily use for more than a week needs a blood pressure and kidney check.'},
+  {a:'brufen', b:'losar', sev:'mid', t:'Ibuprofen with losartan', why:'The painkiller works against the blood pressure medicine and adds kidney strain, especially if you are also on a water tablet.', do:'Use paracetamol for routine pain and keep ibuprofen for short bursts.'},
+  {a:'combi', b:'telma', sev:'mid', t:'Combiflam with telmisartan', why:'The ibuprofen in Combiflam blunts the blood pressure medicine and stresses the kidneys.', do:'Choose plain paracetamol while you are on blood pressure treatment.'},
+  {a:'brufen', b:'omnacortil', sev:'high', t:'Ibuprofen with prednisolone', why:'A painkiller that strips the stomach lining plus a steroid that slows healing is the classic recipe for a bleeding ulcer.', do:'If both are truly needed, you should be on a stomach protector as well. Stop and call the doctor if you get black stool or stomach pain.'},
+  {a:'disprin', b:'omnacortil', sev:'high', t:'Aspirin with prednisolone', why:'Together they sharply raise the chance of a stomach ulcer that bleeds.', do:'Ask whether paracetamol can replace the aspirin for pain, and whether you need a stomach protector.'},
+  {a:'ciplox', b:'shelcal', sev:'mid', t:'Ciprofloxacin with calcium', why:'Calcium grabs the antibiotic in the gut and stops it from being absorbed. You can end up taking a full course that never reached the infection.', do:'Keep a gap of two hours before and six hours after the antibiotic. The daily plan already spaces these out.'},
+  {a:'ciplox', b:'digene', sev:'mid', t:'Ciprofloxacin with an antacid', why:'The metals in antacid gels bind the antibiotic and block its absorption.', do:'Leave at least two hours between them.'},
+  {a:'eltroxin', b:'shelcal', sev:'mid', t:'Thyroid tablet with calcium', why:'Calcium blocks thyroid hormone from being absorbed, so your thyroid stays under-treated even though you take the tablet daily.', do:'Thyroid tablet on an empty stomach at 7 am, calcium at night. Never in the same hour.'},
+  {a:'eltroxin', b:'pan', sev:'low', t:'Thyroid tablet with pantoprazole', why:'Less stomach acid means slightly less thyroid hormone gets absorbed.', do:'Keep your timing consistent every day, and mention it when your thyroid blood test is reviewed.'},
+  {a:'glycomet', b:'omnacortil', sev:'mid', t:'Metformin with a steroid', why:'Steroids push blood sugar up, which can undo your diabetes control within days.', do:'Test your sugar more often while on the steroid and tell your doctor the readings.'},
+  {a:'amaryl', b:'ciplox', sev:'mid', t:'Glimepiride with ciprofloxacin', why:'This antibiotic can push blood sugar dangerously low when combined with a sulfonylurea.', do:'Carry glucose or sugar. Learn the signs: sweating, shaking, sudden hunger, confusion.'},
+  {a:'amaryl', b:'metolar', sev:'mid', t:'Glimepiride with metoprolol', why:'The heart medicine hides the early warning signs of low sugar — the racing heart and the trembling you would normally notice.', do:'Check sugar by meter rather than by feel, especially before driving.'},
+  {a:'atorva', b:'azithral', sev:'mid', t:'Atorvastatin with azithromycin', why:'The antibiotic can raise statin levels, and the muscle-damage risk goes up with it.', do:'Report muscle aching, weakness or dark urine straight away. Some doctors pause the statin during the course.'},
+  {a:'alprax', b:'ultracet', sev:'high', t:'Alprazolam with tramadol', why:'Both slow down breathing. Together, especially at night, they can slow it far more than either alone.', do:'This pair needs an explicit decision by the prescriber. Never add an extra dose of either because you could not sleep.'},
+  {a:'alprax', b:'cetzine', sev:'mid', t:'Alprazolam with cetirizine', why:'Two sedating medicines stack up. Next-morning drowsiness is common and dangerous on a two-wheeler.', do:'Do not ride or drive until you know how the pair affects you.'},
+  {a:'alprax', b:'montair', sev:'mid', t:'Alprazolam with levocetirizine', why:'Added sedation, slower reactions, heavier mornings.', do:'Take both at night and avoid driving the next morning until you are sure.'},
+  {a:'amlong', b:'atorva', sev:'low', t:'Amlodipine with atorvastatin', why:'Amlodipine raises atorvastatin levels a little. Usually harmless below 20 mg of the statin.', do:'No change needed, but mention any new muscle ache.'},
+  {a:'metolar', b:'amlong', sev:'low', t:'Metoprolol with amlodipine', why:'A common and intentional pairing, but it can drop blood pressure too far when you stand up suddenly.', do:'Stand up slowly. If you feel faint or dizzy, get your blood pressure checked sitting and standing.'},
+  {a:'pan', b:'omez', sev:'mid', t:'Two acid-blockers together', why:'Pantoprazole and omeprazole do the same job. Doubling up adds side effects without adding relief.', do:'Keep one. Ask the doctor which, especially if one came from an older prescription.'},
+  {a:'cetzine', b:'montair', sev:'mid', t:'Two antihistamines together', why:'Cetirizine and the levocetirizine inside Montair-LC are near-identical. You are taking a double dose.', do:'Keep one of the two. Check whether the older one is still needed.'},
+  {a:'telma', b:'losar', sev:'high', t:'Two blood pressure medicines of the same type', why:'Telmisartan and losartan work the same way. Together they can drop pressure too far and push potassium up.', do:'This usually means an old prescription was never stopped. Call the doctor before the next dose.'},
+  {a:'augmentin', b:'azithral', sev:'mid', t:'Two antibiotics at once', why:'Sometimes deliberate, often an accident when two doctors prescribe separately. Unnecessary doubling adds side effects and fuels resistance.', do:'Confirm that both were prescribed by the same doctor knowing about the other.'},
+  {a:'atorva', b:'rosuvas', sev:'high', t:'Two statins together', why:'Both lower cholesterol the same way. Doubling multiplies the risk of muscle damage without extra benefit.', do:'Only one should continue. Call the prescriber before the next dose.'}
+];
+
+/* ═══════════════════════════════════════════════
+   DOSAGE & FREQUENCY — typical adult ranges (demo)
+   ═══════════════════════════════════════════════ */
+const DOSAGE = {
+  dolo:{unit:'tablet · 650mg', maxPerDose:2, freqMax:4},
+  crocin:{unit:'tablet · 500mg', maxPerDose:2, freqMax:4},
+  combi:{unit:'tablet', maxPerDose:1, freqMax:3},
+  brufen:{unit:'tablet · 400mg', maxPerDose:1, freqMax:3},
+  ecosprin:{unit:'tablet · 75mg', maxPerDose:1, freqMax:1},
+  disprin:{unit:'tablet', maxPerDose:2, freqMax:3},
+  augmentin:{unit:'tablet · 625mg', maxPerDose:1, freqMax:3},
+  azithral:{unit:'tablet · 500mg', maxPerDose:1, freqMax:1},
+  ciplox:{unit:'tablet · 500mg', maxPerDose:1, freqMax:2},
+  cefixime:{unit:'tablet · 200mg', maxPerDose:1, freqMax:2},
+  flagyl:{unit:'tablet · 400mg', maxPerDose:1, freqMax:3},
+  pan:{unit:'tablet · 40mg', maxPerDose:1, freqMax:1},
+  omez:{unit:'tablet · 20mg', maxPerDose:1, freqMax:2},
+  digene:{unit:'spoon/tablet', maxPerDose:2, freqMax:4},
+  cetzine:{unit:'tablet · 10mg', maxPerDose:1, freqMax:1},
+  montair:{unit:'tablet', maxPerDose:1, freqMax:1},
+  sinarest:{unit:'tablet', maxPerDose:1, freqMax:3},
+  glycomet:{unit:'tablet · 500mg', maxPerDose:2, freqMax:2},
+  amaryl:{unit:'tablet · 2mg', maxPerDose:1, freqMax:1},
+  telma:{unit:'tablet · 40mg', maxPerDose:1, freqMax:1},
+  losar:{unit:'tablet · 50mg', maxPerDose:1, freqMax:1},
+  amlong:{unit:'tablet · 5mg', maxPerDose:1, freqMax:1},
+  metolar:{unit:'tablet · 50mg', maxPerDose:1, freqMax:2},
+  atorva:{unit:'tablet · 10mg', maxPerDose:1, freqMax:1},
+  rosuvas:{unit:'tablet · 10mg', maxPerDose:1, freqMax:1},
+  clopilet:{unit:'tablet · 75mg', maxPerDose:1, freqMax:1},
+  warf:{unit:'tablet · 5mg', maxPerDose:1, freqMax:1},
+  eltroxin:{unit:'tablet · 50mcg', maxPerDose:1, freqMax:1},
+  alprax:{unit:'tablet · 0.25mg', maxPerDose:1, freqMax:2},
+  ultracet:{unit:'tablet', maxPerDose:1, freqMax:4},
+  omnacortil:{unit:'tablet · 10mg', maxPerDose:1, freqMax:1},
+  shelcal:{unit:'tablet', maxPerDose:1, freqMax:2},
+  zincovit:{unit:'tablet', maxPerDose:1, freqMax:1}
+};
+const DOSAGE_DEFAULT = {unit:'tablet', maxPerDose:2, freqMax:3};
+
+/* ═══════════════════════════════════════════════
+   ALTERNATIVES — for a doctor/pharmacist to weigh,
+   never auto-substituted
+   ═══════════════════════════════════════════════ */
+const ALTS = {
+  omez:['Pantoprazole (Pan 40) — interferes far less with clopidogrel'],
+  brufen:['Paracetamol (Dolo 650) — similar relief, much lower stomach/kidney/bleeding risk'],
+  combi:['Plain paracetamol if the swelling is mild'],
+  disprin:['Paracetamol for routine fever or headache'],
+  losar:['Confirm with the doctor whether Losar or Telma should be the one that continues'],
+  telma:['Confirm with the doctor whether Telma or Losar should be the one that continues'],
+  atorva:['Confirm with the doctor whether Atorva or Rosuvas should be the one that continues'],
+  rosuvas:['Confirm with the doctor whether Rosuvas or Atorva should be the one that continues'],
+  cetzine:['One antihistamine only — Cetzine or Montair-LC, not both'],
+  montair:['One antihistamine only — Montair-LC or Cetzine, not both'],
+  azithral:['Confirm one doctor knowingly prescribed both antibiotics before continuing either'],
+  augmentin:['Confirm one doctor knowingly prescribed both antibiotics before continuing either'],
+  alprax:['Ask about a non-sedating option for anxiety if paired with a strong painkiller'],
+  ultracet:['Ask whether plain paracetamol could cover the pain instead, given the sedation overlap']
+};
+
+const FOOD = {
+  flagyl:{sev:'high', t:'No alcohol with metronidazole', why:'Even a small drink can cause violent vomiting, flushing and a pounding heart.', do:'Avoid all alcohol during the course and for three days after the last tablet. Check cough syrups too.'},
+  ciplox:{sev:'mid', t:'Keep milk and curd away from ciprofloxacin', why:'Dairy calcium binds the antibiotic so it never reaches the infection.', do:'Two hours clear on either side. Also stay out of strong sun — this drug makes skin burn faster.'},
+  eltroxin:{sev:'mid', t:'Thyroid tablet on an empty stomach', why:'Food, tea and coffee cut how much hormone is absorbed.', do:'Take it 45 minutes before breakfast, at the same time every day.'},
+  glycomet:{sev:'low', t:'Metformin with food', why:'Taken on an empty stomach it commonly causes nausea and loose motions.', do:'Take it in the middle of a meal, not before.'},
+  atorva:{sev:'low', t:'Skip grapefruit with atorvastatin', why:'Grapefruit blocks the enzyme that clears the statin, so levels rise.', do:'Uncommon in Indian diets, but check imported juices.'},
+  alprax:{sev:'high', t:'No alcohol, no driving with alprazolam', why:'Alcohol multiplies the sedation and slows breathing.', do:'No alcohol at all. Do not ride a two-wheeler until you know how it affects you.'},
+  warf:{sev:'mid', t:'Keep green leafy vegetables steady on warfarin', why:'Vitamin K in spinach, methi and cabbage works against warfarin. Big swings in how much you eat swing your INR.', do:'You do not have to avoid them — just eat a similar amount each week.'},
+  ultracet:{sev:'high', t:'No alcohol with tramadol', why:'Both slow breathing and judgement.', do:'Avoid alcohol entirely while on this medicine.'},
+  brufen:{sev:'low', t:'Ibuprofen after food', why:'On an empty stomach it can burn the stomach lining.', do:'Always take it after a proper meal, never with just tea.'},
+  omnacortil:{sev:'mid', t:'Steroids after breakfast', why:'Taken later in the day they disturb sleep; taken empty they upset the stomach.', do:'Take the full dose after breakfast unless told otherwise. Never stop a steroid suddenly.'}
+};
+
+const CONDITIONS = [
+  {id:'pregnant', label:'Pregnant'},
+  {id:'breastfeeding', label:'Breastfeeding'},
+  {id:'kidney', label:'Kidney problem'},
+  {id:'liver', label:'Liver problem'},
+  {id:'ulcer', label:'Stomach ulcer or acidity'},
+  {id:'asthma', label:'Asthma'},
+  {id:'diabetes', label:'Diabetes'},
+  {id:'bp', label:'High blood pressure'},
+  {id:'heart', label:'Heart disease'},
+  {id:'elderly', label:'Over 65'}
+];
+const ALLERGIES = [
+  {id:'penicillin', label:'Penicillin / Amoxicillin'},
+  {id:'sulfa', label:'Sulfa drugs'},
+  {id:'nsaid', label:'Aspirin / painkillers'},
+  {id:'quinolone', label:'Ciprofloxacin family'}
+];
+
+const COND_RULES = [
+  {cond:'ulcer', test:m=>m.nsaid, sev:'high', t:m=>`${m.brand} with a stomach ulcer`, why:'Painkillers of this family strip the protective layer of the stomach. With an existing ulcer this can cause a bleed.', do:'Ask for paracetamol instead, and about a stomach protector if this one must continue.'},
+  {cond:'asthma', test:m=>m.nsaid, sev:'mid', t:m=>`${m.brand} with asthma`, why:'Roughly one in ten adults with asthma wheezes badly after this class of painkiller.', do:'If you have never taken it before, ask the doctor. Keep your inhaler nearby for the first dose.'},
+  {cond:'kidney', test:m=>m.nsaid, sev:'high', t:m=>`${m.brand} with a kidney problem`, why:'These painkillers cut blood flow through the kidney and can worsen function quickly.', do:'Do not take it without the kidney doctor agreeing. Paracetamol is usually the safer choice.'},
+  {cond:'kidney', test:m=>m.gen.includes('Metformin'), sev:'high', t:()=>'Metformin with a kidney problem', why:'When kidneys are weak, metformin can build up and cause a dangerous acid build-up in the blood.', do:'Your kidney function decides the safe dose. This needs a doctor, not a pharmacy counter.'},
+  {cond:'pregnant', test:m=>m.nsaid, sev:'high', t:m=>`${m.brand} during pregnancy`, why:'This class of painkiller is avoided in pregnancy, particularly after the sixth month.', do:'Paracetamol at the lowest dose is the usual alternative. Confirm with your obstetrician.'},
+  {cond:'pregnant', test:m=>m.family==='fluoroquinolone', sev:'high', t:m=>`${m.brand} during pregnancy`, why:'This antibiotic family is avoided in pregnancy because of effects on developing cartilage.', do:'Safer antibiotics exist for almost every infection in pregnancy. Ask for one.'},
+  {cond:'pregnant', test:m=>m.gen.includes('Warfarin'), sev:'high', t:()=>'Warfarin during pregnancy', why:'Warfarin crosses to the baby and can cause birth defects.', do:'This needs an urgent call to your doctor — not the next appointment.'},
+  {cond:'liver', test:m=>m.para, sev:'mid', t:m=>`${m.brand} with a liver problem`, why:'Paracetamol is cleared by the liver. The usual safe ceiling is lower when the liver is struggling.', do:'Ask what your personal daily limit is. It is often 2000 mg rather than 4000 mg.'},
+  {cond:'elderly', test:m=>m.sedating, sev:'mid', t:m=>`${m.brand} after 65`, why:'Sedating medicines are a leading cause of night-time falls and hip fractures in older adults.', do:'Ask whether a non-sedating option exists. Keep a light on the way to the bathroom.'},
+  {cond:'heart', test:m=>m.nsaid, sev:'mid', t:m=>`${m.brand} with heart disease`, why:'Regular use of this painkiller class raises the risk of heart events and fluid retention.', do:'Short courses only, and tell your cardiologist.'}
+];
+const ALLERGY_RULES = [
+  {al:'penicillin', test:m=>m.family==='penicillin', t:m=>`${m.brand} and your penicillin allergy`, why:'Amoxicillin belongs to the penicillin family. A previous reaction means the next one can be faster and more severe.', do:'Do not take this. Call the prescriber today and ask for a different class. Tell every doctor and pharmacist about this allergy.'},
+  {al:'nsaid', test:m=>m.nsaid, t:m=>`${m.brand} and your painkiller allergy`, why:'This medicine is in the same family as the one you reacted to.', do:'Do not take it. Paracetamol is usually tolerated, but confirm with your doctor.'},
+  {al:'quinolone', test:m=>m.family==='fluoroquinolone', t:m=>`${m.brand} and your antibiotic allergy`, why:'Ciprofloxacin is in the family you have reacted to before.', do:'Do not take it. Ask for an alternative class.'}
+];
+
+/* ═══════════════════════════════════════════════
+   i18n — interface chrome in English, Hindi, Tamil
+   ═══════════════════════════════════════════════ */
+const I18N = {
+  hi:{
+    tagline:'हर घर के लिए दवा सुरक्षा', howItWorks:'यह कैसे काम करता है',
+    navCheck:'दवाइयाँ जोड़ें', navCheckSub:'पर्ची स्कैन करें या खोजें',
+    navResult:'सुरक्षा जाँच', navResultSub:'टकराव, खाना, दोहराव',
+    navPlan:'दैनिक योजना', navPlanSub:'कब क्या लेना है',
+    navYou:'आपकी जानकारी', navYouSub:'एलर्जी, बीमारियाँ',
+    railFootT:'सुरक्षित और निजी प्रोसेसिंग।', railFootB:' आपकी पर्ची और विवरण आपके सत्र तक ही सीमित रहते हैं।',
+    heroH:'चार दवाइयाँ। एक वहाँ नहीं होनी चाहिए।',
+    heroP:'डॉक्टर की दी हुई पर्ची की फ़ोटो लीजिए। MediSafe दवाओं के नाम पढ़ता है, उन्हें आपस में और आपकी सेहत से मिलाकर जाँचता है, और सरल शब्दों में बताता है कि क्या पूछना चाहिए — दवा लेने से पहले।',
+    tryDemo:'नमूना पर्ची स्कैन करें', uploadYours:'अपनी पर्ची डालें',
+    stat1:'भारत में इतनी पर्चियों में कम से कम एक टकराव होता है',
+    stat2:'जेनेरिक पर जाने से औसत सालाना बचत',
+    stat3:'आपका डेटा कभी बेचा नहीं जाता',
+    dropH:'पर्ची की फ़ोटो यहाँ छोड़िए', dropP:'साफ़ फ़ोन फ़ोटो काफ़ी है। हस्तलेख पढ़ना मुश्किल है, इसलिए हर नाम जाँच लीजिए।',
+    chooseFile:'फ़ोटो चुनें', useSample:'नमूना पर्ची',
+    ocrNoteStatic:'यह ऐप बैकएंड पर Tesseract OCR का उपयोग करके पर्ची पढ़ता है और दवाइयों का मिलान करता है।',
+    addH:'नाम से दवा जोड़ें', addP:'ब्रांड या साल्ट — “Dolo”, “paracetamol”, “Azithral” आज़माइए।',
+    listH:'आपकी दवाइयाँ', runCheck:'इन्हें एक साथ जाँचें', clearAll:'सूची हटाएँ',
+    discT:'MediSafe दूसरी नज़र है, डॉक्टर नहीं।',
+    discB:'यह ज्ञात टकराव दिखाता है ताकि आप बेहतर सवाल पूछ सकें। यह तय नहीं कर सकता कि पर्ची आपके लिए सही है या नहीं। इस स्क्रीन के आधार पर कोई दवा बंद मत कीजिए — लिखने वाले डॉक्टर को फ़ोन कीजिए।',
+    discB2:'यह पन्ना अपने डॉक्टर या फार्मासिस्ट को दिखाइए और लाल या नारंगी चिह्न वाली हर बात पूछिए।',
+    resH:'सुरक्षा जाँच', printReport:'रिपोर्ट प्रिंट करें', seePlan:'दैनिक योजना देखें', editList:'सूची बदलें',
+    planH:'आपका दिन, घंटे के हिसाब से',
+    planP:'कुछ दवाइयाँ पेट में एक-दूसरे से लड़ती हैं। बस समय अलग करने से बात बन जाती है।',
+    printPlan:'योजना प्रिंट करें', backResult:'सुरक्षा जाँच पर लौटें',
+    youH:'आपकी जानकारी',
+    youP:'इनसे तय होता है कि क्या जोखिम है। जो दर्द निवारक ज़्यादातर लोगों के लिए ठीक है, वह अल्सर के साथ ठीक नहीं। सब कुछ इसी डिवाइस पर रहता है।',
+    aboutH:'आपके बारे में', fName:'नाम (आपातकालीन कार्ड के लिए)', fAge:'उम्र', fWeight:'वज़न (किलो)', fBlood:'ब्लड ग्रुप', fContact:'आपातकालीन संपर्क',
+    condH:'आपकी बीमारियाँ', condP:'जो लागू हो उसे चुनिए। MediSafe उन दवाओं की चेतावनी बढ़ा देगा।',
+    allergyH:'ज्ञात एलर्जी', allergyP:'पेनिसिलिन एलर्जी भारतीय क्लीनिक में गंभीर प्रतिक्रिया का सबसे आम कारण है।',
+    ecardH:'आपातकालीन कार्ड', ecardP:'प्रिंट कीजिए, मोड़िए, पर्स में रखिए।',
+    keepH:'इसे उपयोगी रखना', keep1:'जब भी डॉक्टर खुराक बदले, इसे बदल दीजिए।',
+    keep2:'एलर्जी में प्रतिक्रिया लिखिए, सिर्फ़ दवा का नाम नहीं।',
+    keep3:'बुज़ुर्ग माता-पिता के लिए भी रखिए।',
+    printCard:'कार्ड प्रिंट करें', saveProfile:'जानकारी सहेजें',
+    tabCheck:'दवाइयाँ', tabResult:'सुरक्षा', tabPlan:'योजना', tabYou:'आप'
+  },
+  ta:{
+    tagline:'ஒவ்வொரு வீட்டுக்கும் மருந்து பாதுகாப்பு', howItWorks:'இது எப்படி வேலை செய்கிறது',
+    navCheck:'மருந்துகளைச் சேர்', navCheckSub:'சீட்டை ஸ்கேன் செய் அல்லது தேடு',
+    navResult:'பாதுகாப்புச் சோதனை', navResultSub:'மோதல், உணவு, இரட்டிப்பு',
+    navPlan:'நாள் திட்டம்', navPlanSub:'எதை எப்போது எடுப்பது',
+    navYou:'உங்கள் விவரங்கள்', navYouSub:'ஒவ்வாமை, நோய்கள்',
+    railFootT:'பாதுகாப்பான செயல்முறை.', railFootB:' உங்கள் விவரங்கள் உங்கள் உலாவல் அமர்வில் மட்டுமே பாதுகாப்பாக இருக்கும்.',
+    heroH:'நான்கு மருந்துகள். ஒன்று அங்கே இருக்கக் கூடாது.',
+    heroP:'மருத்துவர் தந்த சீட்டைப் புகைப்படம் எடுங்கள். MediSafe மருந்துப் பெயர்களைப் படித்து, அவற்றை ஒன்றோடொன்றும் உங்கள் உடல்நிலையோடும் ஒப்பிட்டு, எளிய சொற்களில் என்ன கேட்க வேண்டும் என்று சொல்லும் — மருந்து எடுப்பதற்கு முன்பே.',
+    tryDemo:'மாதிரிச் சீட்டை ஸ்கேன் செய்', uploadYours:'உங்கள் சீட்டைப் பதிவேற்று',
+    stat1:'இந்தியாவில் இத்தனை சீட்டுகளில் ஒரு மோதலாவது உள்ளது',
+    stat2:'ஜெனரிக்கிற்கு மாறினால் சராசரி ஆண்டு சேமிப்பு',
+    stat3:'உங்கள் தரவு யாருக்கும் விற்கப்படுவதில்லை',
+    dropH:'சீட்டின் புகைப்படத்தை இங்கே விடுங்கள்', dropP:'தெளிவான கைபேசிப் படம் போதும். கையெழுத்தைப் படிப்பது கடினம், எனவே ஒவ்வொரு பெயரையும் சரிபாருங்கள்.',
+    chooseFile:'படத்தைத் தேர்ந்தெடு', useSample:'மாதிரிச் சீட்டு',
+    ocrNoteStatic:'இந்த செயலி பின்தளத்தில் Tesseract OCR ஐப் பயன்படுத்தி மருந்துச் சீட்டுகளைப் படித்துச் சரிபார்க்கிறது.',
+    addH:'பெயரால் மருந்து சேர்', addP:'பிராண்ட் அல்லது சால்ட் — “Dolo”, “paracetamol”, “Azithral” முயற்சியுங்கள்.',
+    listH:'உங்கள் மருந்துப் பட்டியல்', runCheck:'இவற்றை ஒன்றாகச் சோதி', clearAll:'பட்டியலை அழி',
+    discT:'MediSafe இரண்டாவது கண், மருத்துவர் அல்ல.',
+    discB:'இது அறியப்பட்ட மோதல்களைக் காட்டுகிறது, நல்ல கேள்விகள் கேட்க. சீட்டு உங்களுக்குச் சரியா என்பதை இது தீர்மானிக்க முடியாது. இந்தத் திரையைப் பார்த்து எந்த மருந்தையும் நிறுத்தாதீர்கள் — எழுதிய மருத்துவரை அழையுங்கள்.',
+    discB2:'இந்தப் பக்கத்தை உங்கள் மருத்துவரிடமோ மருந்தாளரிடமோ காட்டி, சிவப்பு அல்லது ஆரஞ்சு குறியிட்ட அனைத்தையும் கேளுங்கள்.',
+    resH:'பாதுகாப்புச் சோதனை', printReport:'அறிக்கையை அச்சிடு', seePlan:'நாள் திட்டத்தைப் பார்', editList:'பட்டியலைத் திருத்து',
+    planH:'உங்கள் நாள், மணிநேரம் வாரியாக',
+    planP:'சில மருந்துகள் வயிற்றில் ஒன்றோடொன்று மோதும். நேரத்தைப் பிரித்தாலே பெரும்பாலும் போதும்.',
+    printPlan:'திட்டத்தை அச்சிடு', backResult:'சோதனைக்குத் திரும்பு',
+    youH:'உங்கள் விவரங்கள்',
+    youP:'இவை எது ஆபத்து என்பதை மாற்றும். பெரும்பாலானோருக்குப் பரவாயில்லாத வலி மாத்திரை, வயிற்றுப் புண் உள்ளவருக்குப் பரவாயில்லை அல்ல.',
+    aboutH:'உங்களைப் பற்றி', fName:'பெயர் (அவசரக் கார்டுக்கு)', fAge:'வயது', fWeight:'எடை (கிலோ)', fBlood:'ரத்தப் பிரிவு', fContact:'அவசரத் தொடர்பு',
+    condH:'உங்கள் உடல்நிலைகள்', condP:'பொருந்துவதைத் தேர்ந்தெடுங்கள். MediSafe எச்சரிக்கை அளவை உயர்த்தும்.',
+    allergyH:'அறியப்பட்ட ஒவ்வாமைகள்', allergyP:'பென்சிலின் ஒவ்வாமையே இந்திய கிளினிக்கில் கடுமையான எதிர்வினைக்கு மிகப் பொதுவான காரணம்.',
+    ecardH:'அவசரக் கார்டு', ecardP:'அச்சிட்டு, மடித்து, பணப்பையில் வைத்துக்கொள்ளுங்கள்.',
+    keepH:'இதைப் பயனுள்ளதாக வைப்பது', keep1:'மருத்துவர் அளவை மாற்றும் போதெல்லாம் இதையும் மாற்றுங்கள்.',
+    keep2:'ஒவ்வாமையில் மருந்துப் பெயர் மட்டுமல்ல, என்ன நிகழ்ந்தது என்றும் எழுதுங்கள்.',
+    keep3:'வயதான பெற்றோருக்கும் ஒன்று வைத்திருங்கள்.',
+    printCard:'கார்டை அச்சிடு', saveProfile:'விவரங்களைச் சேமி',
+    tabCheck:'மருந்துகள்', tabResult:'பாதுகாப்பு', tabPlan:'திட்டம்', tabYou:'நீங்கள்'
+  }
+};
+const EN = {};
+document.querySelectorAll('[data-i18n]').forEach(el=>{ EN[el.dataset.i18n] = el.textContent; });
+
+/* ═══════════════════════════════════════════════
+   STATE
+   ═══════════════════════════════════════════════ */
+const store = {
+  get(k,f){ try{ const v=localStorage.getItem('medisafe:'+k); return v?JSON.parse(v):f; }catch(e){ return f; } },
+  set(k,v){ try{ localStorage.setItem('medisafe:'+k, JSON.stringify(v)); }catch(e){} }
+};
+let S = {
+  meds: store.get('meds', []),
+  profile: store.get('profile', {name:'',age:'',weight:'',blood:'',contact:'',conds:[],allergies:[]}),
+  lang: store.get('lang','en'),
+  course: store.get('course',{}),
+  freq: store.get('freq', {}),
+  dose: store.get('dose', {}),
+  history: store.get('history', []),
+  review: store.get('review', null),
+  profiles: store.get('profiles', {}),
+  activeProfileName: store.get('activeProfileName', 'You'),
+  remindersOn: false,
+  findings: []
+};
+
+const byId = id => MEDS.find(m=>m.id===id);
+const $ = s => document.querySelector(s);
+const $$ = s => [...document.querySelectorAll(s)];
+const esc = s => String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const SEV_META = {
+  high:{emoji:'🔴', label:'High'},
+  mid:{emoji:'🟡', label:'Moderate'},
+  low:{emoji:'🟢', label:'Low'}
+};
+const SOURCE_NOTE = 'Curated interaction reference (demo dataset) — cross-check against CDSCO labelling or a pharmacist before acting';
+
+function toast(msg){
+  const t=$('#toast'); t.textContent=msg; t.classList.add('on');
+  clearTimeout(t._h); t._h=setTimeout(()=>t.classList.remove('on'),2600);
+}
+
+/* ═══════════════════════════════════════════════
+   LANGUAGE
+   ═══════════════════════════════════════════════ */
+function applyLang(){
+  const d = S.lang==='en' ? EN : Object.assign({}, EN, I18N[S.lang]||{});
+  $$('[data-i18n]').forEach(el=>{ const v=d[el.dataset.i18n]; if(v) el.textContent=v; });
+  document.documentElement.lang = S.lang;
+  $('#lang').value = S.lang;
+  store.set('lang', S.lang);
+}
+$('#lang').addEventListener('change', e=>{ S.lang=e.target.value; applyLang(); renderAll(); });
+
+/* ═══════════════════════════════════════════════
+   THEME
+   ═══════════════════════════════════════════════ */
+$('#themeBtn').addEventListener('click', ()=>{
+  const cur = document.documentElement.getAttribute('data-theme');
+  const dark = cur ? cur==='dark' : matchMedia('(prefers-color-scheme: dark)').matches;
+  document.documentElement.setAttribute('data-theme', dark?'light':'dark');
+});
+
+/* ═══════════════════════════════════════════════
+   NAVIGATION
+   ═══════════════════════════════════════════════ */
+function go(view){
+  $$('.view').forEach(v=>v.classList.toggle('on', v.id==='view-'+view));
+  $$('.rail-step,.tabbar button').forEach(b=>b.setAttribute('aria-current', String(b.dataset.view===view)));
+  window.scrollTo({top:0, behavior:'smooth'});
+  if(view==='result') renderResult();
+  if(view==='plan') renderPlan();
+  if(view==='you'){ renderEcard(); renderProfileSwitch(); }
+  if(view==='history') renderHistory();
+}
+$$('.rail-step,.tabbar button').forEach(b=>b.addEventListener('click',()=>go(b.dataset.view)));
+
+/* ═══════════════════════════════════════════════
+   OCR / PRESCRIPTION SCANNING
+   ═══════════════════════════════════════════════ */
+const SAMPLE = ['dolo','combi','ciplox','shelcal'];
+const STEPS = [
+  'Sharpening the photo…',
+  'Finding the lines of text…',
+  'Matching names against the medicine list…',
+  'Checking strengths and dosing marks…'
+];
+
+function runSimulatedDemo(){
+  const box=$('#ocrBox'), bar=$('#bar'), note=$('#ocrNote');
+  box.hidden=false; bar.style.width='0%';
+  $('#slip').classList.add('scanning');
+  let i=0;
+  const tick=()=>{
+    if(i<STEPS.length){
+      note.textContent = STEPS[i];
+      bar.style.width = ((i+1)/STEPS.length*100)+'%';
+      i++; setTimeout(tick, 620);
+    } else {
+      $('#slip').classList.remove('scanning');
+      const added = SAMPLE.filter(id=>!S.meds.includes(id));
+      S.meds = [...new Set([...S.meds, ...SAMPLE])];
+      persist(); renderMeds();
+      note.innerHTML = `Read <b>${SAMPLE.length}</b> medicine names, doses and frequencies from the sample slip. Check each one against the paper before continuing.`;
+      bar.style.width='100%';
+      renderExtracted(SAMPLE);
+      toast(added.length ? `${added.length} medicines added from the slip` : 'Those medicines are already in your list');
+      setTimeout(()=>document.getElementById('myMeds').scrollIntoView({behavior:'smooth', block:'center'}), 400);
+    }
+  };
+  tick();
+}
+
+function renderExtracted(ids){
+  let box = $('#extractBox');
+  if(!box){
+    box = document.createElement('div');
+    box.id = 'extractBox';
+    box.className = 'extract-list';
+    $('#ocrBox').appendChild(box);
+  }
+  box.innerHTML = `<p class="note" style="margin:2px 0 4px">AI-read details — medicine, dose × frequency, and course length where one applies:</p>` +
+    ids.map(id=>{
+      const m=byId(id); if(!m) return '';
+      const freq = m.when?m.when.length:1;
+      const durationTxt = m.course ? `${m.course}-day course` : 'ongoing';
+      return `<div class="extract-row"><b>${esc(m.brand)}</b><span>1 × ${freq}/day</span><span>${esc(durationTxt)}</span></div>`;
+    }).join('');
+}
+$('#tryDemo').addEventListener('click', runSimulatedDemo);
+$('#tryDemo2').addEventListener('click', runSimulatedDemo);
+
+const drop=$('#drop'), fileInput=$('#file');
+['dragenter','dragover'].forEach(ev=>drop.addEventListener(ev,e=>{e.preventDefault(); drop.classList.add('hot');}));
+['dragleave','drop'].forEach(ev=>drop.addEventListener(ev,e=>{e.preventDefault(); drop.classList.remove('hot');}));
+drop.addEventListener('drop', e=>{ const f=e.dataTransfer.files[0]; if(f) handleFile(f); });
+fileInput.addEventListener('change', e=>{ const f=e.target.files[0]; if(f) handleFile(f); });
+
+async function handleFile(f){
+  if(!f.type.startsWith('image/')){
+    toast('That file is not an image. A photo of the slip works best.');
+    return;
+  }
+
+  // Display local preview
+  const r = new FileReader();
+  r.onload = () => {
+    $('#previewBox').innerHTML = `<div class="preview"><img src="${r.result}" alt="Your prescription photo"></div>`;
+  };
+  r.readAsDataURL(f);
+
+  const box=$('#ocrBox'), bar=$('#bar'), note=$('#ocrNote');
+  box.hidden=false;
+  bar.style.width='30%';
+  note.textContent='Uploading and running OCR engine...';
+
+  const formData = new FormData();
+  formData.append('file', f);
+
+  try {
+    const res = await fetch(`${BACKEND_URL}/api/scan`, {
+      method: 'POST',
+      body: formData
+    });
+
+    if(!res.ok) throw new Error('Backend OCR failed');
+    const data = await res.json();
+
+    bar.style.width='100%';
+    if(data.detected_ids && data.detected_ids.length > 0){
+      const added = data.detected_ids.filter(id => !S.meds.includes(id));
+      S.meds = [...new Set([...S.meds, ...data.detected_ids])];
+      persist();
+      renderMeds();
+      note.innerHTML = `Identified <b>${data.detected_ids.length}</b> medicine(s): ${data.matches.map(m=>m.brand + ' (' + m.confidence + '%)').join(', ')}`;
+      renderExtracted(data.detected_ids);
+      toast(`${added.length} medicines added from prescription`);
+      setTimeout(()=>document.getElementById('myMeds').scrollIntoView({behavior:'smooth', block:'center'}), 400);
+    } else {
+      note.textContent = 'No matching medicines detected. Try searching manually below.';
+      toast('No medicines detected in photo.');
+    }
+  } catch(err) {
+    console.warn('Backend unavailable, falling back to local simulation:', err);
+    runSimulatedDemo();
+  }
+}
+
+/* ═══════════════════════════════════════════════
+   SEARCH + LIST
+   ═══════════════════════════════════════════════ */
+function renderSearch(q=''){
+  const box=$('#results');
+  const term=q.trim().toLowerCase();
+  if(!term){ box.innerHTML=''; return; }
+  const hits = MEDS.filter(m=>(m.brand+' '+m.gen+' '+m.use+' '+m.cls).toLowerCase().includes(term)).slice(0,10);
+  if(!hits.length){
+    box.innerHTML=`<div class="empty" style="padding:22px"><h3>No match for “${esc(q)}”</h3><p class="note">This demo carries 33 common Indian medicines. Try a brand like Dolo, Azithral or Telma, or the salt name.</p></div>`;
+    return;
+  }
+  box.innerHTML = hits.map(m=>{
+    const on = S.meds.includes(m.id);
+    return `<button class="result" data-add="${m.id}" ${on?'disabled style="opacity:.5"':''}>
+      <span class="pill-art ${m.abx?'abx':''}"><i></i><i></i><i></i></span>
+      <span><b>${esc(m.brand)}</b><small>${esc(m.gen)} · ${esc(m.use)}</small></span>
+      <span class="add">${on?'✓':'+'}</span></button>`;
+  }).join('');
+}
+$('#q').addEventListener('input', e=>renderSearch(e.target.value));
+$('#results').addEventListener('click', e=>{   const b=e.target.closest('[data-add]'); if(!b) return;   S.meds.push(b.dataset.add); persist(); renderMeds(); renderSearch($('#q').value);
+  toast(`${byId(b.dataset.add).brand} added`);
+});
+
+function renderMeds(){
+  const box=$('#myMeds');
+  $('#listCount').textContent = S.meds.length ? `${S.meds.length} medicine${S.meds.length>1?'s':''} ready to check` : '';
+  if(!S.meds.length){
+    box.innerHTML=`<div class="empty"><h3>Nothing in the list yet</h3><p class="note" style="margin:0 auto">Scan the sample slip above, or search for a medicine by name. Add every medicine you are taking — including the ones you buy without a prescription, because those cause most of the clashes.</p></div>`;
+    $('#runCheck').disabled = true;
+    return;
+  }
+  $('#runCheck').disabled = false;
+  box.innerHTML = S.meds.map(id=>{
+    const m=byId(id); if(!m) return '';
+    const dr = DOSAGE[m.id]||DOSAGE_DEFAULT;
+    const freq = S.freq[m.id] ?? (m.when?m.when.length:1);
+    const dose = S.dose[m.id] ?? 1;
+    const flag = doseFlag(dose, freq, dr);
+    return `<div class="strip" style="align-items:start">
+      <span class="pill-art ${m.abx?'abx':''}"><i></i><i></i><i></i></span>
+      <span>
+        <b>${esc(m.brand)}</b>
+        <small>${esc(m.gen)}</small>
+        <span style="display:flex;gap:6px;flex-wrap:wrap;margin-top:7px">
+          <span class="tag ${m.rx?'rx':'otc'}">${m.rx?'Needs a prescription':'Over the counter'}</span>
+          ${m.abx?'<span class="tag abx">Antibiotic</span>':''}
+          <span class="dose">${esc(m.use)}</span>
+        </span>
+        <div class="dose-row">
+          <span class="dose-field">Dose <input type="number" min="0" step="0.5" value="${dose}" data-dosefor="${m.id}"><span class="unit">${esc(dr.unit)}</span></span>
+          <span class="dose-field">× <input type="number" min="0" step="1" value="${freq}" data-freqfor="${m.id}"> /day</span>
+          <span class="dose-flag ${flag.cls}" data-doseflag="${m.id}">${flag.label}</span>
+        </div>
+      </span>
+      <span class="strip-actions"><button class="x-btn" data-rm="${m.id}" aria-label="Remove ${esc(m.brand)}">✕</button></span>
+    </div>`;
+  }).join('');
+}
+function doseFlag(dose, freq, dr){
+  if(dose>dr.maxPerDose*1.5 || freq>dr.freqMax+1) return {cls:'bad', label:'🔴 Above typical range'};
+  if(dose>dr.maxPerDose || freq>dr.freqMax) return {cls:'warn', label:'🟡 Slightly above typical'};
+  return {cls:'ok', label:'🟢 Within typical range'};
+}
+$('#myMeds').addEventListener('click', e=>{   const b=e.target.closest('[data-rm]'); if(!b) return;   S.meds = S.meds.filter(x=>x!==b.dataset.rm); persist(); renderMeds(); renderSearch($('#q').value);
+});
+$('#myMeds').addEventListener('input', e=>{
+  const df=e.target.dataset.dosefor, ff=e.target.dataset.freqfor;
+  if(df){ S.dose[df]=+e.target.value||0; store.set('dose', S.dose); }
+  if(ff){ S.freq[ff]=+e.target.value||0; store.set('freq', S.freq); }
+  if(df||ff){
+    const id=df||ff, m=byId(id), dr=DOSAGE[id]||DOSAGE_DEFAULT;
+    const flag = doseFlag(S.dose[id]??1, S.freq[id]??(m.when?m.when.length:1), dr);
+    const flagEl = document.querySelector(`[data-doseflag="${id}"]`);
+    if(flagEl){ flagEl.className='dose-flag '+flag.cls; flagEl.textContent=flag.label; }
+  }
+});
+$('#clearAll').addEventListener('click', ()=>{ S.meds=[]; persist(); renderMeds(); toast('List cleared'); });
+$('#runCheck').addEventListener('click', ()=>{ snapshotHistory(); go('result'); });
+
+function persist(){ store.set('meds', S.meds); }
+
+/* ═══════════════════════════════════════════════
+   THE ENGINE
+   ═══════════════════════════════════════════════ */
+function analyse(){
+  const list = S.meds.map(byId).filter(Boolean);
+  const out = [];
+
+  // dosage & frequency check
+  list.forEach(m=>{
+    const dr = DOSAGE[m.id]||DOSAGE_DEFAULT;
+    const dose = S.dose[m.id] ?? 1;
+    const freq = S.freq[m.id] ?? (m.when?m.when.length:1);
+    const flag = doseFlag(dose, freq, dr);
+    if(flag.cls!=='ok'){
+      out.push({
+        sev: flag.cls==='bad'?'high':'mid', kind:'Dosage & frequency',
+        t:`${m.brand} — dose or frequency looks unusual`,
+        why:`Entered as ${dose} ${dr.unit} taken ${freq} time${freq===1?'':'s'} a day. The typical adult range for this medicine tops out around ${dr.maxPerDose} ${dr.unit} per dose, up to ${dr.freqMax} time${dr.freqMax===1?'':'s'} a day.`,
+        do:'Double-check this against the actual prescription slip — it may be a data-entry slip, or the doctor may have a specific reason for a higher dose. Either way, it is worth confirming before the next dose.',
+        pair:[m.brand]
+      });
+    }
+  });
+
+  // pairwise interactions
+  PAIRS.forEach(p=>{
+    if(S.meds.includes(p.a) && S.meds.includes(p.b)){
+      out.push({sev:p.sev, t:p.t, why:p.why, do:p.do, kind:'Interaction', pair:[byId(p.a).brand, byId(p.b).brand]});
+    }
+  });
+
+  // paracetamol total
+  const paraMeds = list.filter(m=>m.para);
+  if(paraMeds.length>1){
+    const total = paraMeds.reduce((s,m)=>s+m.para*2,0);
+    out.push({
+      sev: total>4000?'high':'mid', kind:'Duplicate',
+      t:`${paraMeds.length} medicines here contain paracetamol`,
+      why:`${paraMeds.map(m=>m.brand).join(', ')} all contain paracetamol. Taken twice a day that comes to about ${total} mg — against a ceiling of 4000 mg for a healthy adult. Going past it damages the liver silently, with no warning symptoms until it is late.`,
+      do:'Keep only one paracetamol-containing product. Read the back of every strip: paracetamol hides inside most cold and pain combinations sold over the counter.',
+      pair: paraMeds.map(m=>m.brand)
+    });
+  }
+
+  // class duplicates
+  const dupe = (test, label, why, act, sev) => {
+    const g = list.filter(test);
+    if(g.length>1) out.push({sev, kind:'Duplicate', t:label(g), why:why(g), do:act, pair:g.map(m=>m.brand)});
+  };
+  dupe(m=>m.nsaid, g=>`${g.length} painkillers of the same family`,
+    g=>`${g.map(m=>m.brand).join(' and ')} work the same way. Taking them together multiplies stomach and kidney risk without giving you more pain relief.`,
+    'Keep one. If the pain is not controlled, that is a reason to call the doctor, not to add a second tablet.', 'high');
+  dupe(m=>m.abx, g=>`${g.length} antibiotics at the same time`,
+    g=>`${g.map(m=>m.brand).join(' and ')} are both antibiotics. Sometimes this is deliberate, but very often it happens when two doctors prescribe without knowing about each other.`,
+    'Confirm that one doctor knowingly prescribed both. Unnecessary doubling adds side effects and speeds up resistance.', 'mid');
+  dupe(m=>m.sedating, g=>`${g.length} medicines that cause drowsiness`,
+    g=>`${g.map(m=>m.brand).join(', ')} all make you sleepy. Stacked together they slow reactions far more than you expect.`,
+    'Do not drive or ride until you know the combined effect. If you are over 65, ask about the falls risk at night.', 'mid');
+
+  // conditions
+  COND_RULES.forEach(r=>{
+    if(!S.profile.conds.includes(r.cond)) return;
+    list.filter(r.test).forEach(m=>{
+      out.push({sev:r.sev, kind:'Your health', t:r.t(m), why:r.why, do:r.do, pair:[m.brand]});
+    });
+  });
+  // age-derived
+  const age = parseInt(S.profile.age||0,10);
+  if(age && age<16 && list.some(m=>m.gen.includes('Aspirin'))){
+    out.push({sev:'high', kind:'Your health', t:'Aspirin under the age of 16', why:'Aspirin during a viral fever in children is linked to Reye’s syndrome, a rare but severe brain and liver illness.', do:'Use paracetamol for fever in children. Do not give aspirin without a paediatrician saying so.', pair:['Aspirin']});
+  }
+
+  // allergies
+  ALLERGY_RULES.forEach(r=>{
+    if(!S.profile.allergies.includes(r.al)) return;
+    list.filter(r.test).forEach(m=>{
+      out.push({sev:'high', kind:'Allergy', t:r.t(m), why:r.why, do:r.do, pair:[m.brand]});
+    });
+  });
+
+  const order={high:0,mid:1,low:2};
+  out.sort((x,y)=>order[x.sev]-order[y.sev]);
+  S.findings = out;
+  return out;
+}
+
+function renderResult(){
+  const list = S.meds.map(byId).filter(Boolean);
+  if(!list.length){
+    $('#resSub').textContent='';
+    $('#verdictBox').innerHTML=`<div class="empty"><h3>Add your medicines first</h3><p class="note" style="margin:0 auto 14px">There is nothing to check yet.</p><button class="btn small" onclick="go('check')">Go to the medicine list</button></div>`;
+    ['alertsBox','amrBox','foodBox','savingsBox','reviewBox','altBox','historyCompareBox','gaugeBox','netBox'].forEach(i=>$('#'+i).innerHTML='');
+    return;
+  }
+  const f = analyse();
+  const highs=f.filter(x=>x.sev==='high').length, mids=f.filter(x=>x.sev==='mid').length;
+
+  $('#resSub').textContent = `${list.length} medicines checked against each other, against food and drink, and against the details in your profile.`;
+
+  let cls,icon,head,sub;
+  if(highs){ cls='v-high'; icon='⚠'; head=`${highs} thing${highs>1?'s':''} to sort out before your next dose`;
+    sub='Do not stop anything on your own. Call the doctor who wrote the prescription, or walk into any pharmacy and show them this page — a pharmacist can read it in under a minute.'; }
+  else if(mids){ cls='v-mid'; icon='◑'; head=`${mids} point${mids>1?'s':''} worth asking about`;
+    sub='Nothing here is an emergency. These are the questions to raise at your next visit, and the timing tips to follow meanwhile.'; }
+  else { cls='v-low'; icon='✓'; head='No known clashes in this combination';
+    sub='Based on the medicines you listed and the details in your profile. Add anything you buy over the counter — that is where most surprises come from.'; }
+
+  $('#verdictBox').innerHTML = `<div class="verdict ${cls}">
+    <span class="ring">${icon}</span>
+    <div><h2>${head}</h2><p>${sub}</p></div>
+    <button class="btn ghost small no-print" id="readAloud">Read aloud</button>
+  </div>`;
+  $('#readAloud').addEventListener('click', speak);
+
+  // alerts
+  $('#alertsBox').innerHTML = f.length
+    ? `<div class="sec-head"><h2>What to ask about</h2><p>Ordered by how much it matters.</p></div>
+       <div class="grid">${f.map(a=>{
+        const sm = SEV_META[a.sev];
+        return `
+        <div class="alert ${a.sev}">
+          <div class="alert-head">
+            <span class="sev-badge"><span class="sev-emoji">${sm.emoji}</span> ${sm.label} · ${a.sev==='high'?'Call the doctor':a.sev==='mid'?'Ask about it':'Good to know'}</span>
+            <h3>${esc(a.t)}</h3>
+          </div>
+          <p class="why">${esc(a.why)}</p>
+          <div class="do"><b>What to do</b><span>${esc(a.do)}</span></div>
+          <div class="explain-flow"><b>${a.pair.map(esc).join(' + ')}</b><em>→</em><span>${esc(a.kind)}</span><em>→</em><span>${esc(a.why.split('.')[0])}.</span><em>→</em><span>${sm.emoji} ${sm.label}</span></div>
+          <div class="source-line">🔎 <span>${SOURCE_NOTE}</span></div>
+        </div>`}).join('')}</div>`
+    : `<div class="card"><h3>🟢 Nothing flagged between these medicines</h3><p class="note" style="margin-top:8px">A clear result means no <em>known</em> interaction in this demo dataset. It is not a guarantee. Keep an eye out for anything new after starting a medicine — a rash, breathlessness, swelling of the face — and treat those as urgent whatever this page says.</p></div>`;
+
+  renderAlternatives(f, list);
+  renderReview();
+  renderHistoryCompare(list);
+  renderGauge(f);
+  renderNetwork(list, f);
+  renderAMR(list);
+  renderFood(list);
+  renderSavings(list);
+}
+
+/* ═══════════════════════════════════════════════
+   RISK SCORE GAUGE
+   ═══════════════════════════════════════════════ */
+function renderGauge(findings){
+  const penalty = findings.reduce((s,a)=>s+(a.sev==='high'?15:a.sev==='mid'?7:2),0);
+  const score = Math.max(4, 100-penalty);
+  const color = score>=70?'var(--sev-low)':score>=40?'var(--sev-mid)':'var(--sev-high)';
+  const label = score>=70?'Looks comparatively safe':score>=40?'A few things worth a call':'Needs attention before the next dose';
+  const r=52, c=2*Math.PI*r, off=c*(1-score/100);
+  $('#gaugeBox').innerHTML = `
+    <div class="card glass gauge-wrap">
+      <svg class="gauge-ring" width="128" height="128" viewBox="0 0 128 128">
+        <circle cx="64" cy="64" r="${r}" fill="none" stroke="var(--foil)" stroke-width="12"/>
+        <circle cx="64" cy="64" r="${r}" fill="none" stroke="${color}" stroke-width="12" stroke-linecap="round"
+          stroke-dasharray="${c.toFixed(1)}" stroke-dashoffset="${off.toFixed(1)}" transform="rotate(-90 64 64)"
+          style="transition:stroke-dashoffset 1s cubic-bezier(.16,1,.3,1)"/>
+        <text x="64" y="60" text-anchor="middle" font-size="30" fill="var(--ink)">${score}</text>
+        <text x="64" y="80" text-anchor="middle" font-size="11" fill="var(--ink-faint)" font-family="var(--ff)">/ 100</text>
+      </svg>
+      <div class="gauge-copy">
+        <h3>Prescription risk score</h3>
+        <p><b style="color:${color}">${esc(label)}.</b> Built from the number and severity of everything flagged below — a rough compass, not a diagnosis.</p>
+      </div>
+    </div>`;
+}
+
+/* ═══════════════════════════════════════════════
+   INTERACTION NETWORK DIAGRAM
+   ═══════════════════════════════════════════════ */
+function renderNetwork(list, findings){
+  const box = $('#netBox');
+  const edges = findings.filter(f=>f.kind==='Interaction' && f.pair.length===2);
+  if(!edges.length || list.length<2){ box.innerHTML=''; return; }
+  const nodeNames = [...new Set(edges.flatMap(e=>e.pair).concat(list.map(m=>m.brand)))].filter(n=>edges.some(e=>e.pair.includes(n)));
+  const n = nodeNames.length, R=110, cx=160, cy=140;
+  const pos = {};
+  nodeNames.forEach((name,i)=>{
+    const a = (i/n)*2*Math.PI - Math.PI/2;
+    pos[name] = {x:cx+R*Math.cos(a), y:cy+R*Math.sin(a)};
+  });
+  const sevColor = {high:'var(--sev-high)', mid:'var(--sev-mid)', low:'var(--sev-low)'};
+  const lines = edges.map(e=>{
+    const a=pos[e.pair[0]], b=pos[e.pair[1]]; if(!a||!b) return '';
+    return `<line x1="${a.x}" y1="${a.y}" x2="${b.x}" y2="${b.y}" stroke="${sevColor[e.sev]}" stroke-width="2.5" opacity=".75"/>`;
+  }).join('');
+  const nodes = nodeNames.map(name=>{
+    const p = pos[name];
+    return `<g><circle cx="${p.x}" cy="${p.y}" r="8" fill="var(--card)" stroke="var(--green-700)" stroke-width="2.5"/>
+      <text x="${p.x}" y="${p.y - 14}" text-anchor="middle" font-size="11.5" font-family="var(--ff)" fill="var(--ink)">${esc(name)}</text></g>`;
+  }).join('');
+  box.innerHTML = `
+    <div class="sec-head"><h2>How they connect</h2><p>A visual map of which medicines in your list interact, and how seriously.</p></div>
+    <div class="card net-card glass">
+      <svg viewBox="0 0 320 280" xmlns="http://www.w3.org/2000/svg">${lines}${nodes}</svg>
+      <div class="net-legend">
+        <span><i style="background:var(--sev-high)"></i>High</span>
+        <span><i style="background:var(--sev-mid)"></i>Moderate</span>
+        <span><i style="background:var(--sev-low)"></i>Low</span>
+      </div>
+    </div>`;
+}
+
+/* ═══════════════════════════════════════════════
+   SHARE / EXPORT SUMMARY
+   ═══════════════════════════════════════════════ */
+function buildSummaryText(){
+  const list = S.meds.map(byId).filter(Boolean);
+  const f = S.findings.length ? S.findings : analyse();
+  const lines = [
+    `MediSafe summary — ${S.activeProfileName}`,
+    `Medicines: ${list.map(m=>m.brand).join(', ')||'none'}`,
+    ``,
+    f.length ? 'Flagged:' : 'No known clashes flagged.',
+    ...f.map(a=>`${SEV_META[a.sev].emoji} ${a.t} — ${a.do}`)
+  ];
+  if(S.review && S.review.name) lines.push('', `Reviewed by ${S.review.name} (${S.review.role}) on ${S.review.date}`);
+  lines.push('', 'Generated by MediSafe — verify with a doctor or pharmacist.');
+  return lines.join('\n');
+}
+$('#shareBtn')?.addEventListener('click', async ()=>{
+  const text = buildSummaryText();
+  if(navigator.share){
+    try{ await navigator.share({title:'MediSafe summary', text}); return; }catch(e){ /* fall through to copy */ }
+  }
+  try{ await navigator.clipboard.writeText(text); toast('Summary copied — paste it into WhatsApp or a message'); }
+  catch(e){ toast('Could not copy automatically — select and copy the report instead'); }
+});
+
+/* ═══════════════════════════════════════════════
+   ALTERNATIVES (for a doctor/pharmacist to weigh)
+   ═══════════════════════════════════════════════ */
+function renderAlternatives(findings, list){
+  const flaggedIds = new Set();
+  findings.forEach(a=>{ list.forEach(m=>{ if(a.pair.includes(m.brand)) flaggedIds.add(m.id); }); });
+  const rows = [...flaggedIds].filter(id=>ALTS[id]).map(id=>({m:byId(id), alts:ALTS[id]}));
+  if(!rows.length){ $('#altBox').innerHTML=''; return; }
+  $('#altBox').innerHTML = `
+    <div class="sec-head"><h2>Alternatives to discuss</h2><p>Not an automatic swap — options for your doctor or pharmacist to weigh against the reason the medicine was prescribed.</p></div>
+    <div class="grid g2">${rows.map(r=>`
+      <div class="alt-card">
+        <h4>${esc(r.m.brand)}</h4>
+        <ul class="alt-list">${r.alts.map(a=>`<li>${esc(a)}</li>`).join('')}</ul>
+        <p class="alt-note">Ask before switching — the original choice may account for something this page doesn't know.</p>
+      </div>`).join('')}</div>`;
+}
+
+/* ═══════════════════════════════════════════════
+   DOCTOR / PHARMACIST REVIEW
+   ═══════════════════════════════════════════════ */
+function renderReview(){
+  const box=$('#reviewBox');
+  if(S.review && S.review.name){
+    box.innerHTML = `<div class="review-banner">✅ Reviewed by <b>${esc(S.review.name)}</b> (${esc(S.review.role)}) on ${esc(S.review.date)}${S.review.note?' — “'+esc(S.review.note)+'”':''}
+      <button id="editReview">Edit</button></div>`;
+    $('#editReview').addEventListener('click', ()=>renderReviewForm());
+  } else {
+    renderReviewForm();
+  }
+}
+function renderReviewForm(){
+  const r = S.review||{};
+  $('#reviewBox').innerHTML = `
+    <div class="review-card">
+      <h3>Doctor / pharmacist review</h3>
+      <p class="note" style="margin:6px 0 12px">If a healthcare professional has looked at this flagged prescription, record it here — for your own record, or to show whoever picks it up next.</p>
+      <div class="review-form">
+        <div class="field"><label>Reviewer's name</label><input type="text" id="revName" placeholder="Dr. / Pharmacist name" value="${esc(r.name||'')}"></div>
+        <div class="field"><label>Role</label><select id="revRole"><option ${r.role==='Doctor'?'selected':''}>Doctor</option><option ${r.role==='Pharmacist'?'selected':''}>Pharmacist</option></select></div>
+        <div class="field full"><label>Note (optional)</label><input type="text" id="revNote" placeholder="e.g. Dose confirmed correct as prescribed" value="${esc(r.note||'')}"></div>
+      </div>
+      <div class="hero-actions"><button class="btn small" id="saveReview">Mark as reviewed</button></div>
+    </div>`;
+  $('#saveReview').addEventListener('click', ()=>{
+    const name=$('#revName').value.trim();
+    if(!name){ toast('Add the reviewer name first'); return; }
+    S.review = {name, role:$('#revRole').value, note:$('#revNote').value.trim(), date:new Date().toLocaleDateString('en-IN')};
+    store.set('review', S.review);
+    renderReview();
+    toast('Review recorded');
+  });
+}
+
+/* ═══════════════════════════════════════════════
+   PATIENT HISTORY
+   ═══════════════════════════════════════════════ */
+function snapshotHistory(){
+  if(!S.meds.length) return;
+  const last = S.history[S.history.length-1];
+  const same = last && last.meds.length===S.meds.length && last.meds.every(id=>S.meds.includes(id));
+  if(same) return;
+  S.history.push({date:new Date().toLocaleString('en-IN',{day:'numeric',month:'short',year:'numeric',hour:'2-digit',minute:'2-digit'}), meds:[...S.meds]});
+  if(S.history.length>10) S.history = S.history.slice(-10);
+  store.set('history', S.history);
+}
+function renderHistoryCompare(list){
+  if(S.history.length<2){ $('#historyCompareBox').innerHTML=''; return; }
+  const prev = S.history[S.history.length-2];
+  const newMeds = list.filter(m=>!prev.meds.includes(m.id));
+  const repeatMeds = list.filter(m=>prev.meds.includes(m.id));
+  if(!newMeds.length && !repeatMeds.length){ $('#historyCompareBox').innerHTML=''; return; }
+  $('#historyCompareBox').innerHTML = `
+    <div class="sec-head"><h2>Compared to your last check</h2><p>From ${esc(prev.date)}.</p></div>
+    <div class="card">
+      ${newMeds.length?`<p class="note" style="margin-bottom:6px"><b style="color:var(--ink)">New this time:</b></p><div>${newMeds.map(m=>`<span class="hist-pill new-med">＋ ${esc(m.brand)}</span>`).join('')}</div>`:''}
+      ${repeatMeds.length?`<p class="note" style="margin:12px 0 6px"><b style="color:var(--ink)">Carried over from last time — check these aren't now duplicated by something new:</b></p><div>${repeatMeds.map(m=>`<span class="hist-pill repeat-med">↻ ${esc(m.brand)}</span>`).join('')}</div>`:''}
+    </div>`;
+}
+function renderHistory(){
+  const box=$('#historyBox');
+  if(!S.history.length){
+    box.innerHTML = `<div class="empty"><h3>No past checks yet</h3><p class="note" style="margin:0 auto">Every time you run "Check these together", a snapshot is saved here.</p></div>`;
+    return;
+  }
+  const rows = [...S.history].reverse();
+  box.innerHTML = rows.map((h,i)=>{
+    const prev = S.history[S.history.length-2-i];
+    return `<div class="hist-item">
+      <div class="hist-date">🕘 ${esc(h.date)}${i===0?' · most recent':''}</div>
+      <div>${h.meds.map(id=>{
+        const m=byId(id); if(!m) return '';
+        const isNew = prev ? !prev.meds.includes(id) : false;
+        return `<span class="hist-pill ${isNew?'new-med':''}">${esc(m.brand)}</span>`;
+      }).join('')}</div>
+    </div>`;
+  }).join('');
+}
+$('#clearHistory').addEventListener('click', ()=>{ S.history=[]; store.set('history', S.history); renderHistory(); toast('History cleared'); });
+
+function renderAMR(list){
+  const abx = list.filter(m=>m.abx);
+  if(!abx.length){ $('#amrBox').innerHTML=''; return; }
+  const days = abx[0].course||5;
+  const key = abx[0].id;
+  const done = S.course[key]||0;
+  $('#amrBox').innerHTML = `
+    <div class="amr">
+      <h2 style="color:var(--indigo)">Antibiotic course tracker</h2>
+      <p class="note" style="margin-top:8px;color:var(--ink-soft)">India uses more antibiotics than almost any country, and a large share of courses are stopped early once the fever settles. The bacteria that survive a half-finished course are the ones that learn to ignore the drug next time — often in the same household. Finishing the course is the single most useful thing you can do here.</p>
+      <div class="meter"><i style="width:${Math.round(done/days*100)}%"></i></div>
+      <p style="margin:0;font-size:13.5px;color:var(--ink-soft)">${done} of ${days} days of ${esc(abx[0].brand)} marked complete</p>
+      <div class="course">${Array.from({length:days},(_,i)=>`<button data-day="${i+1}" class="${i<done?'done':''}">${i+1}</button>`).join('')}</div>
+      <p class="note" style="margin-top:14px;color:var(--ink-soft)">Tap a day after you finish it. If side effects make you want to stop, call the doctor rather than quietly stopping — there is usually an alternative.</p>
+    </div>`;
+}
+$('#amrBox').addEventListener('click', e=>{
+  const b=e.target.closest('[data-day]'); if(!b) return;
+  const list = S.meds.map(byId).filter(Boolean);
+  const abx = list.filter(m=>m.abx); if(!abx.length) return;
+  const key = abx[0].id, days = abx[0].course||5, d=+b.dataset.day;
+  S.course[key] = (S.course[key]===d) ? d-1 : d;
+  store.set('course', S.course); renderAMR(list);
+  if(S.course[key]===days) toast('Course complete. That is how resistance gets starved out.');
+});
+
+function renderFood(list){
+  const rules = list.map(m=>FOOD[m.id]?({...FOOD[m.id], brand:m.brand}):null).filter(Boolean);
+  if(!rules.length){ $('#foodBox').innerHTML=''; return; }
+  const order={high:0,mid:1,low:2}; rules.sort((a,b)=>order[a.sev]-order[b.sev]);
+  $('#foodBox').innerHTML = `
+    <div class="sec-head"><h2>Food, drink and daily life</h2><p>The rules that get forgotten most often.</p></div>
+    <div class="grid g2">${rules.map(r=>`
+      <div class="alert ${r.sev}">
+        <div class="alert-head"><span class="sev-badge"><span class="sev-emoji">${SEV_META[r.sev].emoji}</span> ${r.sev==='high'?'Avoid':r.sev==='mid'?'Time it right':'Small tip'}</span><h3>${esc(r.t)}</h3></div>
+        <p class="why">${esc(r.why)}</p>
+        <div class="do"><b>What to do</b><span>${esc(r.do)}</span></div>
+        <div class="source-line">🔎 <span>${SOURCE_NOTE}</span></div>
+      </div>`).join('')}</div>`;
+}
+
+function renderSavings(list){
+  const rows = list.filter(m=>m.jan && m.mrp>m.jan);
+  if(!rows.length){ $('#savingsBox').innerHTML=''; return; }
+  const total = rows.reduce((s,m)=>s+(m.mrp-m.jan),0);
+  $('#savingsBox').innerHTML = `
+    <div class="sec-head"><h2>The same medicine, less money</h2><p>Indicative Jan Aushadhi generic prices against typical branded MRP, per strip.</p></div>
+    <div class="card">
+      ${rows.map(m=>`<div class="save-row">
+        <div><b style="font-weight:600">${esc(m.brand)}</b><br><small style="color:var(--ink-faint);font-size:12.5px">${esc(m.gen)}</small></div>
+        <span class="money old">₹${m.mrp}</span>
+        <span class="money new">₹${m.jan}</span>
+        <span class="tag otc">−${Math.round((1-m.jan/m.mrp)*100)}%</span>
+      </div>`).join('')}
+      <div class="save-total"><b>₹${total*4}</b><span style="color:var(--ink-soft);font-size:14px">saved over a month, roughly, if every one of these is bought as a generic</span></div>
+      <p class="note" style="margin-top:14px">The salt inside is the same and the quality standard is the same. Ask your pharmacist for the generic by the salt name, or find the nearest Jan Aushadhi Kendra. Prices shown are illustrative for this demo.</p>
+    </div>`;
+}
+
+/* ═══════════════════════════════════════════════
+   DAILY PLAN
+   ═══════════════════════════════════════════════ */
+/* ═══════════════════════════════════════════════
+   REMINDERS (best-effort, while the tab is open)
+   ═══════════════════════════════════════════════ */
+let reminderTimers = [];
+function clearReminders(){ reminderTimers.forEach(clearTimeout); reminderTimers=[]; }
+async function enableReminders(){
+  if(!('Notification' in window)){ toast('This browser cannot show notifications'); return; }
+  let perm = Notification.permission;
+  if(perm==='default') perm = await Notification.requestPermission();
+  if(perm!=='granted'){ toast('Notifications were not allowed'); return; }
+  clearReminders();
+  const list = S.meds.map(byId).filter(Boolean);
+  const now = new Date();
+  SLOTS.forEach(s=>{
+    const items = list.filter(m=>(m.when||[]).includes(s.k));
+    if(!items.length) return;
+    const [h,mAmPm] = s.time.split(':');
+    let hour = parseInt(h,10);
+    const isPm = s.time.toLowerCase().includes('pm');
+    if(isPm && hour!==12) hour+=12;
+    if(!isPm && hour===12) hour=0;
+    const min = parseInt(mAmPm,10);
+    const target = new Date(now.getFullYear(),now.getMonth(),now.getDate(),hour,min,0);
+    if(target<now) target.setDate(target.getDate()+1);
+    const ms = target - now;
+    reminderTimers.push(setTimeout(()=>{
+      new Notification('Time for your medicine', {body:`${s.label}: ${items.map(m=>m.brand).join(', ')}`});
+    }, ms));
+  });
+  S.remindersOn = true;
+  $('#reminderStatus').textContent = `Reminders are on for today — ${reminderTimers.length} slot${reminderTimers.length===1?'':'s'} scheduled while this tab stays open.`;
+  $('#reminderBtn').textContent = 'Turn off';
+  toast('Reminders enabled for today');
+}
+function disableReminders(){
+  clearReminders(); S.remindersOn=false;
+  $('#reminderStatus').textContent = 'Turn on to get a browser notification at each slot\u2019s time, for as long as this tab stays open.';
+  $('#reminderBtn').textContent = 'Enable reminders';
+  toast('Reminders turned off');
+}
+$('#reminderBtn').addEventListener('click', ()=>{ S.remindersOn ? disableReminders() : enableReminders(); });
+
+const SLOTS = [
+  {k:'empty',     time:'7:00 am', label:'Empty stomach'},
+  {k:'morning',   time:'8:30 am', label:'After breakfast'},
+  {k:'afternoon', time:'1:30 pm', label:'After lunch'},
+  {k:'night',     time:'9:00 pm', label:'After dinner'}
+];
+function renderPlan(){
+  const list = S.meds.map(byId).filter(Boolean);
+  const box=$('#dayPlan');
+  if(!list.length){
+    box.innerHTML=`<div class="empty" style="grid-column:1/-1;border:0"><h3>No medicines to schedule</h3><p class="note" style="margin:0 auto 14px">Add your list first and the day builds itself.</p><button class="btn small" onclick="go('check')">Add medicines</button></div>`;
+    $('#gapBox').innerHTML=''; return;
+  }
+  const hasCipro = S.meds.includes('ciplox'), hasCal = list.some(m=>m.cal), hasThyroid = S.meds.includes('eltroxin');
+  box.innerHTML = SLOTS.map(s=>{
+    let items = list.filter(m=>(m.when||[]).includes(s.k));
+    if(hasCipro && s.k==='night') items = items.filter(m=>!m.cal);
+    let note='';
+    if(s.k==='empty' && hasThyroid) note='Nothing else in this hour — not even tea. Wait 45 minutes before breakfast.';
+    if(s.k==='afternoon' && hasCipro && hasCal) note='Calcium has been moved here, away from the antibiotic.';
+    if(hasCipro && hasCal && s.k==='afternoon') items = items.concat(list.filter(m=>m.cal));
+    return `<div class="slot-time">${s.time}<span>${s.label}</span></div>
+      <div class="slot">
+        <div class="slot-items">${
+          items.length ? items.map(m=>`<span class="slot-pill"><i style="background:${m.abx?'var(--indigo)':'var(--green-500)'}"></i>${esc(m.brand)}</span>`).join('')
+          : '<span class="slot-empty">Nothing due</span>'}</div>
+        ${note?`<p class="slot-note">${note}</p>`:''}
+      </div>`;
+  }).join('');
+
+  const gaps=[];
+  if(hasCipro && hasCal) gaps.push({t:'Two hours between the antibiotic and calcium', d:'Calcium locks onto ciprofloxacin in the gut. The plan above already separates them — keep that gap for the whole course.'});
+  if(hasThyroid && hasCal) gaps.push({t:'Four hours between thyroid tablet and calcium', d:'Thyroid hormone first thing, calcium at night. Never together.'});
+  if(S.meds.includes('ecosprin') && list.some(m=>m.nsaid)) gaps.push({t:'Aspirin first, painkiller later', d:'Take the low-dose aspirin in the morning and leave at least two hours before any ibuprofen, or the heart protection is blunted.'});
+  if(list.some(m=>m.sedating)) gaps.push({t:'Drowsy medicines at night', d:'Anything sedating sits in the 9 pm slot so the effect passes while you sleep. Do not move it to the morning if you ride or drive.'});
+  $('#gapBox').innerHTML = gaps.length ? `
+    <div class="sec-head"><h2>Why the gaps matter</h2></div>
+    <div class="grid g2">${gaps.map(g=>`<div class="card"><h3>${esc(g.t)}</h3><p class="note" style="margin-top:8px">${esc(g.d)}</p></div>`).join('')}</div>` : '';
+}
+
+/* ═══════════════════════════════════════════════
+   PROFILE
+   ═══════════════════════════════════════════════ */
+/* ═══════════════════════════════════════════════
+   FAMILY PROFILES
+   ═══════════════════════════════════════════════ */
+function currentSnapshot(){
+  return {meds:S.meds, profile:S.profile, freq:S.freq, dose:S.dose, course:S.course, history:S.history, review:S.review};
+}
+function saveActiveIntoProfiles(){
+  S.profiles[S.activeProfileName] = currentSnapshot();
+  store.set('profiles', S.profiles);
+}
+function switchProfile(name){
+  saveActiveIntoProfiles();
+  const snap = S.profiles[name] || {meds:[], profile:{name:'',age:'',weight:'',blood:'',contact:'',conds:[],allergies:[]}, freq:{}, dose:{}, course:{}, history:[], review:null};
+  S.activeProfileName = name;
+  S.meds = snap.meds; S.profile = snap.profile; S.freq = snap.freq; S.dose = snap.dose;
+  S.course = snap.course; S.history = snap.history; S.review = snap.review;
+  ['meds','profile','freq','dose','course','history','review','activeProfileName'].forEach(k=>store.set(k, S[k]));
+  store.set('profiles', S.profiles);
+  renderProfileSwitch(); renderAll();
+  toast(`Switched to ${name}`);
+}
+function deleteProfile(name){
+  delete S.profiles[name];
+  store.set('profiles', S.profiles);
+  if(S.activeProfileName===name) switchProfile('You'); else renderProfileSwitch();
+}
+function renderProfileSwitch(){
+  const names = [...new Set(['You', ...Object.keys(S.profiles)])];
+  $('#profileSwitch').innerHTML = names.map(n=>`
+    <span class="profile-pill ${n===S.activeProfileName?'active':''}">
+      <button data-go-profile="${esc(n)}" style="background:none;color:inherit;font-weight:inherit;cursor:pointer;border:0;padding:0">${esc(n)}</button>
+      ${n!=='You'?`<button data-del-profile="${esc(n)}" aria-label="Remove ${esc(n)}">✕</button>`:''}
+    </span>`).join('');
+}
+$('#profileSwitch').addEventListener('click', e=>{
+  const go=e.target.closest('[data-go-profile]'), del=e.target.closest('[data-del-profile]');
+  if(del){ if(confirm(`Remove ${del.dataset.delProfile} and their saved data?`)) deleteProfile(del.dataset.delProfile); return; }
+  if(go && go.dataset.goProfile!==S.activeProfileName) switchProfile(go.dataset.goProfile);
+});
+$('#addProfileBtn').addEventListener('click', ()=>{
+  const input=$('#newProfileName'); const name=input.value.trim();
+  if(!name){ toast('Give this family member a name first'); return; }
+  if(name==='You' || S.profiles[name]){ toast('That name is already in use'); return; }
+  S.profiles[name] = {meds:[], profile:{name:'',age:'',weight:'',blood:'',contact:'',conds:[],allergies:[]}, freq:{}, dose:{}, course:{}, history:[], review:null};
+  store.set('profiles', S.profiles);
+  input.value='';
+  renderProfileSwitch();
+  toast(`${name} added — tap the name to switch to their list`);
+});
+
+function renderProfile(){
+  $('#conds').innerHTML = CONDITIONS.map(c=>`<label class="check"><input type="checkbox" data-cond="${c.id}" ${S.profile.conds.includes(c.id)?'checked':''}>${c.label}</label>`).join('');
+  $('#allergies').innerHTML = ALLERGIES.map(a=>`<label class="check"><input type="checkbox" data-al="${a.id}" ${S.profile.allergies.includes(a.id)?'checked':''}>${a.label}</label>`).join('');
+  ['name','age','weight','blood','contact'].forEach(k=>{
+    const el=$('#p'+(k==='name'?'name':k)); if(el) el.value = S.profile[k]||'';
+  });
+}
+document.addEventListener('change', e=>{
+  const c=e.target.dataset.cond, a=e.target.dataset.al;
+  if(c){ S.profile.conds = e.target.checked ? [...S.profile.conds,c] : S.profile.conds.filter(x=>x!==c); saveProfile(true); }
+  if(a){ S.profile.allergies = e.target.checked ? [...S.profile.allergies,a] : S.profile.allergies.filter(x=>x!==a); saveProfile(true); }
+});
+const PFIELDS = {pname:'name', page:'age', pweight:'weight', pblood:'blood', pcontact:'contact'};
+document.addEventListener('input', e=>{
+  const key = PFIELDS[e.target.id]; if(!key) return;
+  S.profile[key] = e.target.value; saveProfile(true);
+});
+$('#pblood').addEventListener('change', e=>{ S.profile.blood = e.target.value; saveProfile(true); });
+function saveProfile(quiet){
+  store.set('profile', S.profile);
+  renderEcard();
+  if(!quiet) toast('Details saved on this device');
+}
+$('#saveProfile').addEventListener('click', ()=>saveProfile(false));
+
+function renderEcard(){
+  const p=S.profile;
+  const meds = S.meds.map(byId).filter(Boolean).map(m=>m.brand);
+  const cnames = p.conds.map(c=>(CONDITIONS.find(x=>x.id===c)||{}).label).filter(Boolean);
+  const anames = p.allergies.map(a=>(ALLERGIES.find(x=>x.id===a)||{}).label).filter(Boolean);
+  $('#ecard').innerHTML = `
+    <h3>${esc(p.name||'Your name')}</h3>
+    <p style="margin:0 0 12px;font-size:13px;opacity:.75">Medical information card · MediSafe</p>
+    <div class="erow"><b>Age</b><span>${esc(p.age||'—')}${p.weight?' · '+esc(p.weight)+' kg':''}</span></div>
+    <div class="erow"><b>Blood group</b><span>${esc(p.blood||'Not recorded')}</span></div>
+    <div class="erow"><b>Allergic to</b><span>${anames.length?esc(anames.join(', ')):'None recorded'}</span></div>
+    <div class="erow"><b>Conditions</b><span>${cnames.length?esc(cnames.join(', ')):'None recorded'}</span></div>
+    <div class="erow"><b>Taking</b><span>${meds.length?esc(meds.join(', ')):'Nothing recorded'}</span></div>
+    <div class="erow"><b>In an emergency</b><span>${esc(p.contact||'Add a contact above')}</span></div>`;
+}
+
+/* ═══════════════════════════════════════════════
+   VOICE
+   ═══════════════════════════════════════════════ */
+function speak(){
+  if(!('speechSynthesis' in window)){ toast('This browser cannot read text aloud'); return; }
+  if(speechSynthesis.speaking){ speechSynthesis.cancel(); toast('Stopped'); return; }
+  const f = S.findings.length ? S.findings : analyse();
+  if(!S.meds.length){ toast('Add medicines first'); return; }
+  const lines = f.length
+    ? ['Safety check results.', ...f.slice(0,4).map(a=>`${a.sev==='high'?'Important.':'Please note.'} ${a.t}. ${a.do}`)]
+    : ['Safety check complete. No known clashes were found between the medicines you listed.'];
+  const u = new SpeechSynthesisUtterance(lines.join(' '));
+  u.lang = S.lang==='hi' ? 'hi-IN' : S.lang==='ta' ? 'ta-IN' : 'en-IN';
+  u.rate = .95;
+  speechSynthesis.speak(u);
+  toast('Reading the warnings aloud');
+}
+$('#speakBtn').addEventListener('click', speak);
+
+/* ═══════════════════════════════════════════════
+   BOOT
+   ═══════════════════════════════════════════════ */
+function renderAll(){ renderMeds(); renderProfile(); renderEcard(); renderSearch($('#q').value); renderProfileSwitch(); }
+applyLang();
+renderAll();
+</script>
+</body>
+</html>
